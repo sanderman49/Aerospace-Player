@@ -1,0 +1,183 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AeroPadPlayer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AeroPadPlayer.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+            <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <Label VerticalAlignment="Center"
+                       HorizontalAlignment="Center">Patch</Label>
+                <ComboBox x:Name="patchBox"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          SelectedIndex="0">
+                        <ComboBoxItem>Exosphere</ComboBoxItem>
+                        <ComboBoxItem>Thermosphere</ComboBoxItem>
+                        <ComboBoxItem>Mesosphere</ComboBoxItem>
+                        <ComboBoxItem>Stratosphere</ComboBoxItem>
+                        <ComboBoxItem>Troposphere</ComboBoxItem>
+                        
+                        <ComboBoxItem>Gravity</ComboBoxItem>
+                        <ComboBoxItem>Inertia</ComboBoxItem>
+                        <ComboBoxItem>Satellite</ComboBoxItem>
+                        <ComboBoxItem>Aphelion</ComboBoxItem>
+                        <ComboBoxItem>Perihelion</ComboBoxItem>
+                </ComboBox>
+                
+                <Label VerticalAlignment="Center"
+                       HorizontalAlignment="Center">Scale</Label>
+                <ComboBox x:Name="scaleBox"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          SelectedIndex="0">
+                        <ComboBoxItem>Major</ComboBoxItem>
+                        <ComboBoxItem>Neutral</ComboBoxItem>
+                        <ComboBoxItem>Minor</ComboBoxItem>
+                </ComboBox>
+                
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="CButton">C</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="CSButton">C#</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="2"
+                                Grid.Row="0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="DButton">D</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="DSButton">D#</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="EButton">E</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="2"
+                                Grid.Row="1"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="FButton">F</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="0"
+                                Grid.Row="2"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="FSButton">F#</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="GButton">G</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="GSButton">G#</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="0"
+                                Grid.Row="3"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="AButton">A</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="1"
+                                Grid.Row="3"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="ASButton">A#</Button>
+                        <Button Width="80"
+                                Height="80"
+                                Grid.Column="2"
+                                Grid.Row="3"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" 
+                                FontSize="35"
+                                FontWeight="Bold"
+                                Click="Play"
+                                x:Name="BButton">B</Button>
+                        
+                </Grid>
+                    <Button Click="fileWizard">Import Files</Button>
+        </StackPanel>
+
+</UserControl>
