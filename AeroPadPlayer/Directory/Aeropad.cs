@@ -66,7 +66,7 @@ public class Aeropad
         }
 
         // The path to the desired soundfile.
-        string padLocation = Path.Join(Config.GetPadLocation(), collection, "wav", patch, scale, $"{key}.wav");
+        string padLocation = Path.Join(Config.GetPadLocation(), collection, "mp3", patch, scale, $"{key}.mp3");
 
         return padLocation;
     }

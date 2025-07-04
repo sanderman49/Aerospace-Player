@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.ReactiveUI" />
         <PackageReference Include="Avalonia.Themes.Fluent"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -20,7 +21,10 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="ReactiveUI" />
         <PackageReference Include="SoundFlow" />
+        <PackageReference Include="Xaml.Behaviors.Avalonia" />
+        <PackageReference Include="Xaml.Behaviors.Interactivity" />
     </ItemGroup>
 
     <ItemGroup>

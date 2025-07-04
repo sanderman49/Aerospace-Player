@@ -1,4 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
+        xmlns:rxui="using:Avalonia.ReactiveUI"
+        xmlns:app="clr-namespace:AeroPadPlayer"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:AeroPadPlayer.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,9 +8,12 @@
         xmlns:views="clr-namespace:AeroPadPlayer.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AeroPadPlayer.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="AeroPadPlayer">
-        <views:MainView />
-
+        <Design.DataContext>
+                <vm:MainWindowViewModel/>
+        </Design.DataContext>
         
+        <rxui:RoutedViewHost Router="{Binding Router}"/>
 </Window>

@@ -20,7 +20,7 @@ public class Playback
     public Playback()
     {
         // Create the actual audio session.
-        audioEngine = new MiniAudioEngine(44100, Capability.Playback, SampleFormat.S16);
+        audioEngine = new MiniAudioEngine(44100, Capability.Playback);
         
         // Init players list.
         players = new List<CustomSoundPlayer>();
@@ -35,7 +35,7 @@ public class Playback
         
         // Init the player.
         var file = File.OpenRead(padPath);
-        var player = new CustomSoundPlayer(new ChunkedDataProvider(file));
+        var player = new CustomSoundPlayer(new StreamDataProvider(file));
         
         // Do this for some reason.
         Mixer.Master.AddComponent(player);
@@ -57,9 +57,13 @@ public class Playback
             {
                 break;
             }
-            player.Volume = player.Volume + 0.01f;
-            await Task.Delay(50);
+
+            player.LinearVolume += 0.001f;
+                
+            player.Volume = FadeGain(player.LinearVolume + 0.001f);
+            await Task.Delay(5);
         }
+
     }
 
     // Fades out all pads.
@@ -74,10 +78,12 @@ public class Playback
             Task.Run(async () =>
             {
                 // 5 seconds with 0.001f decrements and 5ms delay.
-                while (player.Volume > 0.01f)
+                while (player.Volume > 0.001f)
                 {
-                    player.Volume = player.Volume - 0.01f;
-                    await Task.Delay(50);
+                    player.LinearVolume -= 0.001f;
+                    
+                    player.Volume = FadeGain(player.LinearVolume - 0.001f);
+                    await Task.Delay(5);
                 }
 
                 // Stop the player.
@@ -96,10 +102,27 @@ public class Playback
         // 5 seconds with 0.001f decrements and 5ms delay.
         while (player.Volume > 0.01f)
         {
-            player.Volume = player.Volume - 0.01f;
+            player.LinearVolume -= 0.01f;
+            
+            player.Volume = FadeGain(player.LinearVolume - 0.01f);
             await Task.Delay(50);
         }
         player.Stop(); 
     }
+
+    float FadeGain(float t)
+    {
+        float gain = MathF.Pow(t, 2.0f); // tweak exponent as needed 
+
+        if (gain > 1f)
+        {
+            gain = 1f;
+        } else if (gain < 0f)
+        {
+            gain = 0f;
+        }
+        return gain;
+    }
+
     
 }

@@ -1,30 +1,69 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using aeropad_player.Audio;
 using aeropad_player.Directory;
+using AeroPadPlayer.Models;
+using AeroPadPlayer.ViewModels;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using Avalonia.ReactiveUI;
+using ReactiveUI;
 
 namespace AeroPadPlayer.Views;
 
-public partial class MainView : UserControl
+public partial class MainView : UserControl, IViewFor<MainViewModel>
 {
-    private Playback playback;
+    
+    private MainViewModel _viewModel;
+    
+    private List<Button> buttons;
+    
+    public string activeKey;
+
     private Aeropad aeropad;
-    private Config config;
-    private string activeKey;
+    private Playback playback;
+    
+    private Program currentProgram;
+
     public MainView()
     {
-        Config.GenerateConfigPath();
         
-        playback = new Playback();
-        aeropad = new Aeropad();
         InitializeComponent();
+        
+        buttons = new List<Button>()
+        {
+            CButton,
+            CSButton,
+            DButton,
+            DSButton,
+            EButton,
+            FButton,
+            FSButton,
+            GButton,
+            GSButton,
+            AButton,
+            ASButton,
+            BButton,
+        };
+
+        patchBox.SelectedValue = ViewModel?.Patch;
+        scaleBox.SelectedValue = ViewModel?.Scale;
     }
+    
+    // These two properties are required by IViewFor<TViewModel>
+    object? IViewFor.ViewModel
+    {
+        get => ViewModel;
+        set => ViewModel = (MainViewModel?)value;
+    }
+
+    public MainViewModel? ViewModel { get; set; } 
 
     public async void Play(object sender, RoutedEventArgs e)
     {
@@ -35,41 +74,42 @@ public partial class MainView : UserControl
         var source = e.Source as Control;
         var button = sender as Button;
 
-        CButton.Opacity = 1;
-        CSButton.Opacity = 1;
-        DButton.Opacity = 1;
-        DSButton.Opacity = 1;
-        DSButton.Opacity = 1;
-        EButton.Opacity = 1;
-        FButton.Opacity = 1;
-        FSButton.Opacity = 1;
-        GButton.Opacity = 1;
-        GSButton.Opacity = 1;
-        AButton.Opacity = 1;
-        ASButton.Opacity = 1;
-        BButton.Opacity = 1;
+        // Set all the buttons to normal opacity (this is terrible).
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            buttons[i].Opacity = 1;
+        }
 
+        // Makes the button darker for some reason.
         source.Opacity = 1.2;
         
         string key = button.Name.Substring(0, 1);
         
+        // Replace the 'S' for sharp with the actual hash symbol.
         if (button.Name.Substring(1, 1) == "S")
         {
             key = key + "#";
         }
 
+        // Stop playing if already active.
         if (activeKey == key)
         {
-            Task.Run(() => playback.StopPad());
+            await Task.Run(() => playback.StopPad());
             activeKey = "";
             source.Opacity = 1;
             return;
         }
-
         activeKey = key;
         
-        Task.Run(() => playback.PlayPad(patch, scale, key));
+        currentProgram = new Program(patch, scale, key);
+
+        if (ProgramList.SelectedItem != null)
+        {
+            ProgramList.SelectedItem = null;
+        }
         
+        // Play the current note.
+        Task.Run(() => playback.PlayPad(patch, scale, key));
     }
 
     public async void fileWizard(object sender, RoutedEventArgs e)
@@ -93,7 +133,44 @@ public partial class MainView : UserControl
         {
             await ExtractZip(files);
         }
+
+    }
+
+    public async void saveProgram(object sender, RoutedEventArgs e)
+    {
+        _viewModel = (MainViewModel)DataContext;
         
+        _viewModel.CurrentProgram.Name = Name.Text;
+        
+        _viewModel.Programs.Add(currentProgram);
+    }
+
+    public async void playProgram(object sender, RoutedEventArgs e)
+    {
+        var listBox = sender as ListBox;
+
+        if (listBox.SelectedItem == null)
+        {
+            return;
+        }
+        
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            buttons[i].Opacity = 1;
+        }
+        
+        Program selectedProgram = listBox.SelectedItem as Program;
+
+        string patch = selectedProgram.Patch;
+        string scale = selectedProgram.Scale;
+        string key = selectedProgram.Key;
+        
+        // Play the current note.
+        Task.Run(() => playback.PlayPad(patch, scale, key));
+    }
+
+    public async void GoToSettings(object sender, RoutedEventArgs e)
+    {
     }
     
     private async Task ExtractZip(IReadOnlyList<IStorageFile> files)

@@ -3,6 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:AeroPadPlayer.ViewModels"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AeroPadPlayer.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -11,173 +13,211 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
-            <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-                <Label VerticalAlignment="Center"
-                       HorizontalAlignment="Center">Patch</Label>
-                <ComboBox x:Name="patchBox"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          SelectedIndex="0">
-                        <ComboBoxItem>Exosphere</ComboBoxItem>
-                        <ComboBoxItem>Thermosphere</ComboBoxItem>
-                        <ComboBoxItem>Mesosphere</ComboBoxItem>
-                        <ComboBoxItem>Stratosphere</ComboBoxItem>
-                        <ComboBoxItem>Troposphere</ComboBoxItem>
+        <StackPanel>
+                <StackPanel HorizontalAlignment="Right">
+                        <Button Command="{Binding GoToSettings}">Settings</Button>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <Label VerticalAlignment="Center"
+                                       HorizontalAlignment="Center">Patch</Label>
+                        <ComboBox x:Name="patchBox"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding PatchIndex}"
+                                  SelectedValue="{Binding Patch}">
+                                <ComboBoxItem>Exosphere</ComboBoxItem>
+                                <ComboBoxItem>Thermosphere</ComboBoxItem>
+                                <ComboBoxItem>Mesosphere</ComboBoxItem>
+                                <ComboBoxItem>Stratosphere</ComboBoxItem>
+                                <ComboBoxItem>Troposphere</ComboBoxItem>
+                                
+                                <ComboBoxItem>Gravity</ComboBoxItem>
+                                <ComboBoxItem>Inertia</ComboBoxItem>
+                                <ComboBoxItem>Satellite</ComboBoxItem>
+                                <ComboBoxItem>Aphelion</ComboBoxItem>
+                                <ComboBoxItem>Perihelion</ComboBoxItem>
+                        </ComboBox>
                         
-                        <ComboBoxItem>Gravity</ComboBoxItem>
-                        <ComboBoxItem>Inertia</ComboBoxItem>
-                        <ComboBoxItem>Satellite</ComboBoxItem>
-                        <ComboBoxItem>Aphelion</ComboBoxItem>
-                        <ComboBoxItem>Perihelion</ComboBoxItem>
-                </ComboBox>
-                
-                <Label VerticalAlignment="Center"
-                       HorizontalAlignment="Center">Scale</Label>
-                <ComboBox x:Name="scaleBox"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          SelectedIndex="0">
-                        <ComboBoxItem>Major</ComboBoxItem>
-                        <ComboBoxItem>Neutral</ComboBoxItem>
-                        <ComboBoxItem>Minor</ComboBoxItem>
-                </ComboBox>
-                
-                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="0"
-                                Grid.Row="0"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="CButton">C</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="1"
-                                Grid.Row="0"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="CSButton">C#</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="2"
-                                Grid.Row="0"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="DButton">D</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="0"
-                                Grid.Row="1"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="DSButton">D#</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="1"
-                                Grid.Row="1"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="EButton">E</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="2"
-                                Grid.Row="1"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="FButton">F</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="0"
-                                Grid.Row="2"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="FSButton">F#</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="1"
-                                Grid.Row="2"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="GButton">G</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="2"
-                                Grid.Row="2"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="GSButton">G#</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="0"
-                                Grid.Row="3"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="AButton">A</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="1"
-                                Grid.Row="3"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="ASButton">A#</Button>
-                        <Button Width="80"
-                                Height="80"
-                                Grid.Column="2"
-                                Grid.Row="3"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center" 
-                                FontSize="35"
-                                FontWeight="Bold"
-                                Click="Play"
-                                x:Name="BButton">B</Button>
+                        <Label VerticalAlignment="Center"
+                               HorizontalAlignment="Center">Scale</Label>
+                        <ComboBox x:Name="scaleBox"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding ScaleIndex}"
+                                  SelectedValue="{Binding Scale}">
+                                <ComboBoxItem>Major</ComboBoxItem>
+                                <ComboBoxItem>Neutral</ComboBoxItem>
+                                <ComboBoxItem>Minor</ComboBoxItem>
+                        </ComboBox>
                         
-                </Grid>
-                    <Button Click="fileWizard">Import Files</Button>
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="C"
+                                        x:Name="CButton">C</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="1"
+                                        Grid.Row="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="C#"
+                                        x:Name="CSButton">C#</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="2"
+                                        Grid.Row="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="D"
+                                        x:Name="DButton">D</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="0"
+                                        Grid.Row="1"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="D#"
+                                        x:Name="DSButton">D#</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="1"
+                                        Grid.Row="1"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="E"
+                                        x:Name="EButton">E</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="2"
+                                        Grid.Row="1"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="F"
+                                        x:Name="FButton">F</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="0"
+                                        Grid.Row="2"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="F#"
+                                        x:Name="FSButton">F#</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="1"
+                                        Grid.Row="2"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="G"
+                                        x:Name="GButton">G</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="2"
+                                        Grid.Row="2"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="G#"
+                                        x:Name="GSButton">G#</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="0"
+                                        Grid.Row="3"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="A"
+                                        x:Name="AButton">A</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="1"
+                                        Grid.Row="3"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="A#"
+                                        x:Name="ASButton">A#</Button>
+                                <Button Width="80"
+                                        Height="80"
+                                        Grid.Column="2"
+                                        Grid.Row="3"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="35"
+                                        FontWeight="Bold"
+                                        Command="{Binding Play}"
+                                        CommandParameter="B"
+                                        x:Name="BButton">B</Button>
+                        </Grid>
+                        <Button Click="fileWizard">Import Complete Collection</Button>
+                            <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
+                            <Button Command="{Binding SaveProgram}">Save</Button>
+                            <ListBox ItemsSource="{Binding Programs}"
+                                     SelectedValue="{Binding SelectedProgram}"
+                                     x:Name="ProgramList">
+                                    <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
+                                                    <ia:InvokeCommandAction Command="{Binding PlayProgram}"/>
+                                            </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                    <StackPanel>
+                                                            <TextBlock Text="{Binding Patch}"></TextBlock>
+                                                            <TextBlock Text="{Binding Scale}"></TextBlock>
+                                                            <TextBlock Text="{Binding Key}"></TextBlock>
+                                                            <TextBlock Text="{Binding Name}"></TextBlock>
+                                                    </StackPanel>
+                                            </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                            </ListBox>
+                </StackPanel>
         </StackPanel>
-
 </UserControl>
