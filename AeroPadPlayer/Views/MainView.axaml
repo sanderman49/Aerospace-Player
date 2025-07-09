@@ -72,6 +72,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[0]}"
                                         CommandParameter="C"
                                         x:Name="CButton">C</Button>
                                 <Button Width="80"
@@ -83,6 +84,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[1]}"
                                         CommandParameter="C#"
                                         x:Name="CSButton">C#</Button>
                                 <Button Width="80"
@@ -94,6 +96,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[2]}"
                                         CommandParameter="D"
                                         x:Name="DButton">D</Button>
                                 <Button Width="80"
@@ -105,6 +108,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[3]}"
                                         CommandParameter="D#"
                                         x:Name="DSButton">D#</Button>
                                 <Button Width="80"
@@ -116,6 +120,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[4]}"
                                         CommandParameter="E"
                                         x:Name="EButton">E</Button>
                                 <Button Width="80"
@@ -127,6 +132,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[5]}"
                                         CommandParameter="F"
                                         x:Name="FButton">F</Button>
                                 <Button Width="80"
@@ -138,6 +144,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[6]}"
                                         CommandParameter="F#"
                                         x:Name="FSButton">F#</Button>
                                 <Button Width="80"
@@ -149,6 +156,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[7]}"
                                         CommandParameter="G"
                                         x:Name="GButton">G</Button>
                                 <Button Width="80"
@@ -160,6 +168,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[8]}"
                                         CommandParameter="G#"
                                         x:Name="GSButton">G#</Button>
                                 <Button Width="80"
@@ -171,6 +180,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[9]}"
                                         CommandParameter="A"
                                         x:Name="AButton">A</Button>
                                 <Button Width="80"
@@ -182,6 +192,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[10]}"
                                         CommandParameter="A#"
                                         x:Name="ASButton">A#</Button>
                                 <Button Width="80"
@@ -193,6 +204,7 @@
                                         FontSize="35"
                                         FontWeight="Bold"
                                         Command="{Binding Play}"
+                                        Opacity="{Binding Opacities[11]}"
                                         CommandParameter="B"
                                         x:Name="BButton">B</Button>
                         </Grid>

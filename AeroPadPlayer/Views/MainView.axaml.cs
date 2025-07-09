@@ -23,19 +23,22 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
     private MainViewModel _viewModel;
     
     private List<Button> buttons;
-    
-    public string activeKey;
+
+    public Button? activeButton;
 
     private Aeropad aeropad;
     private Playback playback;
+
+    private MainViewModel viewModel;
     
     private Program currentProgram;
 
     public MainView()
     {
+        viewModel = (MainViewModel)DataContext;
         
         InitializeComponent();
-        
+    
         buttons = new List<Button>()
         {
             CButton,
@@ -63,8 +66,32 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
         set => ViewModel = (MainViewModel?)value;
     }
 
-    public MainViewModel? ViewModel { get; set; } 
+    public MainViewModel? ViewModel { get; set; }
 
+    public async void ButtonClick(object sender, RoutedEventArgs e)
+    {
+        var source = e.Source as Control;
+        var button = sender as Button;
+        
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            buttons[i].Opacity = 1;
+        }
+
+        if (activeButton?.Name != button?.Name)
+        {
+            // Makes the button darker.
+            button.Opacity = 1.2;
+            activeButton = button;
+        }
+        else
+        {
+            activeButton = null;
+        }
+        
+    }
+
+    /* to be removed
     public async void Play(object sender, RoutedEventArgs e)
     {
         string patch = aeropad.Patches[patchBox.SelectedIndex];
@@ -74,14 +101,6 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
         var source = e.Source as Control;
         var button = sender as Button;
 
-        // Set all the buttons to normal opacity (this is terrible).
-        for (int i = 0; i < buttons.Count; i++)
-        {
-            buttons[i].Opacity = 1;
-        }
-
-        // Makes the button darker for some reason.
-        source.Opacity = 1.2;
         
         string key = button.Name.Substring(0, 1);
         
@@ -92,14 +111,14 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
         }
 
         // Stop playing if already active.
-        if (activeKey == key)
-        {
-            await Task.Run(() => playback.StopPad());
-            activeKey = "";
-            source.Opacity = 1;
-            return;
-        }
-        activeKey = key;
+        //if (activeKey == key)
+        //{
+        //    await Task.Run(() => playback.StopPad());
+        //    activeKey = "";
+        //    source.Opacity = 1;
+        //    return;
+        //}
+        //activeKey = key;
         
         currentProgram = new Program(patch, scale, key);
 
@@ -110,7 +129,7 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
         
         // Play the current note.
         Task.Run(() => playback.PlayPad(patch, scale, key));
-    }
+    } */
 
     public async void fileWizard(object sender, RoutedEventArgs e)
     {
@@ -136,6 +155,7 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
 
     }
 
+    /* to be removed
     public async void saveProgram(object sender, RoutedEventArgs e)
     {
         _viewModel = (MainViewModel)DataContext;
@@ -167,12 +187,8 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
         
         // Play the current note.
         Task.Run(() => playback.PlayPad(patch, scale, key));
-    }
+    } */
 
-    public async void GoToSettings(object sender, RoutedEventArgs e)
-    {
-    }
-    
     private async Task ExtractZip(IReadOnlyList<IStorageFile> files)
     {
         string extractPath = Config.GetSoundsLocation();
