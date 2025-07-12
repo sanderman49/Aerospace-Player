@@ -6,6 +6,7 @@ using System.Windows.Input;
 using aeropad_player.Audio;
 using aeropad_player.Directory;
 using AeroPadPlayer.Models;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ReactiveUI;
 
@@ -26,20 +27,29 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     
     public Program? CurrentProgram { get; set; }
     
-    private Aeropad aeropad;
+    public Aeropad Aeropad { get; }
     
     public ObservableCollection<Program>? Programs { get; set; }
     
-    public string Name { get; set; }
-    public string Patch { get; set; }
-    public string Scale { get; set; }
-    public string Key { get; set; }
+    public string? Name { get; set; }
+    public string? Patch { get; set; }
+    public string? Scale { get; set; }
+    public string? Key { get; set; }
     
+    public string[] Patches { get; set; }
+    public string[] Scales { get; set; }
+    public string[] Keys { get; set; }
+
     public ProgramsViewModel(IScreen screen, Playback player)
     {
         HostScreen = screen;
         Player = player;
+        Aeropad = new Aeropad();
         Programs = new ObservableCollection<Program>();
+
+        Patches = Aeropad.Patches;
+        Scales = Aeropad.Scales;
+        Keys = Aeropad.Keys;
     }
 
     public void PlayProgram()
@@ -64,7 +74,8 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
 
     public void SaveProgram()
     {
-        Programs.Add(new Program(Patch, Scale, Key, Name));
+        // null means the Combobox hasn't been touched by the user.
+        Programs.Add(new Program(Patch ?? Patches[0], Scale ?? Scales[0], Key ?? Keys[0], Name));
     }
         
 }

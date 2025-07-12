@@ -13,11 +13,31 @@
     <StackPanel>
         
         <Label>Patch</Label>
-        <TextBox x:Name="Patch" Text="{Binding Patch}"></TextBox>
+        <ComboBox x:Name="patchBox"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  SelectedIndex="0"
+                  SelectedValue="{Binding Patch}"
+                  ItemsSource="{Binding Patches}">
+        </ComboBox>
+        
         <Label>Scale</Label>
-        <TextBox x:Name="Scale" Text="{Binding Scale}"></TextBox>
+        <ComboBox x:Name="scaleBox"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  SelectedIndex="0"
+                  SelectedValue="{Binding Scale}"
+                  ItemsSource="{Binding Scales}">
+        </ComboBox>
+        
         <Label>Key</Label>
-        <TextBox x:Name="Key" Text="{Binding Key}"></TextBox>
+        <ComboBox x:Name="keyBox"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  SelectedIndex="0"
+                  SelectedValue="{Binding Key}"
+                  ItemsSource="{Binding Keys}">
+        </ComboBox>
         
         <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
         <Button Command="{Binding SaveProgram}">Save</Button>
