@@ -17,6 +17,9 @@
                 <StackPanel HorizontalAlignment="Right">
                         <Button Command="{Binding GoToSettings}">Settings</Button>
                 </StackPanel>
+                <StackPanel HorizontalAlignment="Right">
+                        <Button Command="{Binding GoToPrograms}">Programs</Button>
+                </StackPanel>
                 <StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                         <Label VerticalAlignment="Center"
@@ -209,27 +212,6 @@
                                         x:Name="BButton">B</Button>
                         </Grid>
                         <Button Click="fileWizard">Import Complete Collection</Button>
-                            <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
-                            <Button Command="{Binding SaveProgram}">Save</Button>
-                            <ListBox ItemsSource="{Binding Programs}"
-                                     SelectedValue="{Binding SelectedProgram}"
-                                     x:Name="ProgramList">
-                                    <i:Interaction.Behaviors>
-                                            <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
-                                                    <ia:InvokeCommandAction Command="{Binding PlayProgram}"/>
-                                            </ia:EventTriggerBehavior>
-                                    </i:Interaction.Behaviors>
-                                    <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                    <StackPanel>
-                                                            <TextBlock Text="{Binding Patch}"></TextBlock>
-                                                            <TextBlock Text="{Binding Scale}"></TextBlock>
-                                                            <TextBlock Text="{Binding Key}"></TextBlock>
-                                                            <TextBlock Text="{Binding Name}"></TextBlock>
-                                                    </StackPanel>
-                                            </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                            </ListBox>
                 </StackPanel>
         </StackPanel>
 </UserControl>

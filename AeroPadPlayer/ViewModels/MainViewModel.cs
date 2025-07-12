@@ -43,10 +43,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         set { this.RaiseAndSetIfChanged(ref _opacities, value); }
     }
 
-public ObservableCollection<Program>? Programs { get; set; }
 
-    private Program? _selectedProgram;
-    public Program? SelectedProgram { get => _selectedProgram; set => this.RaiseAndSetIfChanged(ref _selectedProgram, value); }
     
     public Playback Player;
     private Aeropad aeropad;
@@ -58,11 +55,8 @@ public ObservableCollection<Program>? Programs { get; set; }
     public ComboBoxItem Scale { get; set; }
     public int ScaleIndex { get; set; }
     
-    public Program? CurrentProgram { get; set; }
 
     public string ActiveKey = "";
-
-    public string Name { get; set; }
 
 
     public MainViewModel(IScreen screen)
@@ -85,7 +79,6 @@ public ObservableCollection<Program>? Programs { get; set; }
         
         HostScreen = screen;
         
-        Programs = new ObservableCollection<Program>();
         
         Player = new Playback();
         aeropad = new Aeropad();
@@ -94,36 +87,6 @@ public ObservableCollection<Program>? Programs { get; set; }
             HostScreen.Router.Navigate.Execute(new SettingsViewModel(HostScreen))
         );
 
-
-        SaveProgram = ReactiveCommand.Create(() =>
-        {
-            if (CurrentProgram != null)
-            {
-                CurrentProgram.Name = Name;
-                Programs.Add(CurrentProgram);
-            }
-        });
-
-        PlayProgram = ReactiveCommand.Create(() =>
-        {
-            if (SelectedProgram?.Id == CurrentProgram?.Id)
-            {
-                Task.Run(() => Player.StopPad());
-                CurrentProgram = null;
-                SelectedProgram = null;
-                return;
-            }
-
-            CurrentProgram = SelectedProgram;
-
-
-            string patch = CurrentProgram.Patch;
-            string scale = CurrentProgram.Scale;
-            string key = CurrentProgram.Key;
-        
-            Task.Run(() => Player.PlayPad(patch, scale, key)); 
-        });
-        
         Config.GenerateConfigPath();
     }
 
@@ -132,18 +95,18 @@ public ObservableCollection<Program>? Programs { get; set; }
         string patch = Patch?.Content?.ToString() ?? "";
         string scale = Scale?.Content?.ToString() ?? "";
 
-        Program? previousProgram = CurrentProgram;
+        //Program? previousProgram = CurrentProgram;
             
-        CurrentProgram = new Program(patch, scale, key);
+        //CurrentProgram = new Program(patch, scale, key);
 
         // Stop playing if already active.
-        if (previousProgram?.Id == CurrentProgram.Id)
-        {
-            Task.Run(() => Player.StopPad());
-            Opacities[OpacityKeyToIndex(key)] = inactiveOpacity;
-            CurrentProgram = null;
-            return;
-        }
+        //if (previousProgram?.Id == CurrentProgram.Id)
+        //{
+        //    Task.Run(() => Player.StopPad());
+        //    Opacities[OpacityKeyToIndex(key)] = inactiveOpacity;
+        //    CurrentProgram = null;
+        //    return;
+        //}
 
         for (int i = 0; i < Opacities.Count; i++)
         {
@@ -154,6 +117,11 @@ public ObservableCollection<Program>? Programs { get; set; }
         
         // Play the current note.
         Task.Run(() => Player.PlayPad(patch, scale, key));
+    }
+
+    public void GoToPrograms()
+    {
+        HostScreen.Router.Navigate.Execute(new ProgramsViewModel(HostScreen, Player));
     }
 
     private int OpacityKeyToIndex(string key)
@@ -188,5 +156,4 @@ public ObservableCollection<Program>? Programs { get; set; }
                 return -1;
         }
     }
-
 }

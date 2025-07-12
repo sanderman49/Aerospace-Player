@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AeroPadPlayer.ViewModels"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AeroPadPlayer.Views.ProgramsView"
+             x:DataType="vm:ProgramsViewModel">
+    
+    
+    <StackPanel>
+        
+        <Label>Patch</Label>
+        <TextBox x:Name="Patch" Text="{Binding Patch}"></TextBox>
+        <Label>Scale</Label>
+        <TextBox x:Name="Scale" Text="{Binding Scale}"></TextBox>
+        <Label>Key</Label>
+        <TextBox x:Name="Key" Text="{Binding Key}"></TextBox>
+        
+        <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
+        <Button Command="{Binding SaveProgram}">Save</Button>
+        <ListBox ItemsSource="{Binding Programs}"
+                 SelectedValue="{Binding SelectedProgram}"
+                 x:Name="ProgramList">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
+                    <ia:InvokeCommandAction Command="{Binding PlayProgram}"/>
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Patch}"></TextBlock>
+                        <TextBlock Text="{Binding Scale}"></TextBlock>
+                        <TextBlock Text="{Binding Key}"></TextBlock>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+
+</UserControl>

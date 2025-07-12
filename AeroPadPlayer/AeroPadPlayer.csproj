@@ -30,4 +30,11 @@
     <ItemGroup>
       <Folder Include="Directory\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\ProgramsView.axaml.cs">
+        <DependentUpon>ProgramsView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>
