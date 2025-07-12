@@ -12,8 +12,6 @@ public partial class ProgramsView : UserControl, IViewFor<ProgramsViewModel>
     public ProgramsView()
     {
         InitializeComponent();
-        
-        
     }
     
     // These two properties are required by IViewFor<TViewModel>

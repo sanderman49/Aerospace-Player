@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using aeropad_player.Directory;
+using AeroPadPlayer.Models;
 using SoundFlow.Backends.MiniAudio;
 using SoundFlow.Components;
 using SoundFlow.Enums;
@@ -16,7 +17,27 @@ public class Playback
 {
     private MiniAudioEngine audioEngine;
     private List<CustomSoundPlayer> players;
-    
+
+    private Program? _currentProgram;
+    public Program? CurrentProgram
+    {
+        get => _currentProgram;
+        set
+        {
+            _currentProgram = value;
+
+            if (value != null)
+            {
+                PlayPad(value.Patch, value.Scale, value.Key);
+            }
+
+            if (value == null)
+            {
+                StopPad();
+            }
+        }
+    }
+
     public Playback()
     {
         // Create the actual audio session.

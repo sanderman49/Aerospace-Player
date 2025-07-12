@@ -35,6 +35,8 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     private float activeOpacity = 1.2f;
     private float inactiveOpacity = 1f;
 
+    private ProgramsViewModel programsViewModel;
+
     public AvaloniaList<float> _opacities;
 
     public AvaloniaList<float> Opacities
@@ -46,7 +48,6 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
     
     public Playback Player;
-    private Aeropad aeropad;
     private Config config;
 
     public ComboBoxItem Patch { get; set; }
@@ -79,13 +80,13 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         
         HostScreen = screen;
         
-        
         Player = new Playback();
-        aeropad = new Aeropad();
 
         GoToSettings = ReactiveCommand.CreateFromObservable(() => 
             HostScreen.Router.Navigate.Execute(new SettingsViewModel(HostScreen))
         );
+
+        programsViewModel = new ProgramsViewModel(HostScreen, Player);
 
         Config.GenerateConfigPath();
     }
@@ -121,7 +122,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
     public void GoToPrograms()
     {
-        HostScreen.Router.Navigate.Execute(new ProgramsViewModel(HostScreen, Player));
+        HostScreen.Router.Navigate.Execute(programsViewModel);
     }
 
     private int OpacityKeyToIndex(string key)
