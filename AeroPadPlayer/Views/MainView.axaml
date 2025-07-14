@@ -204,7 +204,6 @@
                                                 CommandParameter="B"
                                                 x:Name="BButton">B</Button>
                                 </Grid>
-                                <Button Click="fileWizard">Import Complete Collection</Button>
                         </StackPanel>
                 </StackPanel>
         </DockPanel>

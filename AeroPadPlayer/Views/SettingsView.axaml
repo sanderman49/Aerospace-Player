@@ -7,7 +7,11 @@
              x:Class="AeroPadPlayer.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
     <StackPanel>
-        <Button Command="{Binding GoBack}">Go Back</Button>
+        <Button Command="{Binding GoBack}"
+                HorizontalAlignment="Left"
+                FontSize="32"
+                Background="Transparent">&lt;-</Button>
+        <Button Click="fileWizard">Import AeroPads</Button>
     </StackPanel>
 
 </UserControl>
