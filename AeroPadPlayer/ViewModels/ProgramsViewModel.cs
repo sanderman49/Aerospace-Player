@@ -6,6 +6,7 @@ using System.Windows.Input;
 using aeropad_player.Audio;
 using aeropad_player.Directory;
 using AeroPadPlayer.Models;
+using Avalonia;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ReactiveUI;
@@ -39,6 +40,14 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     public string[] Patches { get; set; }
     public string[] Scales { get; set; }
     public string[] Keys { get; set; }
+    
+
+    private bool _showPopup;
+    public bool ShowPopup
+    {
+        get => _showPopup;
+        set { this.RaiseAndSetIfChanged(ref _showPopup, value); }
+    }
 
     public ProgramsViewModel(IScreen screen, Playback player)
     {
@@ -76,6 +85,16 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     {
         // null means the Combobox hasn't been touched by the user.
         Programs.Add(new Program(Patch ?? Patches[0], Scale ?? Scales[0], Key ?? Keys[0], Name));
+    }
+
+    public void OpenPopup()
+    {
+        ShowPopup = true;
+    }
+    
+    public void ClosePopup()
+    {
+        ShowPopup = false;
     }
         
 }

@@ -10,57 +10,110 @@
              x:DataType="vm:ProgramsViewModel">
     
     
-    <StackPanel>
+    <Grid>
+        <DockPanel>
+            <StackPanel Orientation="Horizontal"
+                        DockPanel.Dock="Top"
+                        HorizontalAlignment="Stretch">
+                <Button Command="{Binding GoBack}"
+                        HorizontalAlignment="Left"
+                        FontSize="32"
+                        Background="Transparent">&lt;-</Button>
+                <Button Command="{Binding OpenPopup}"
+                        HorizontalAlignment="Right"
+                        FontSize="32"
+                        Background="Transparent">+</Button>
+            </StackPanel>
+            
+            <ListBox ItemsSource="{Binding Programs}"
+                     SelectedValue="{Binding SelectedProgram}"
+                     Background="Black"
+                     x:Name="ProgramList">
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Background" Value="#333333"/>
+                        </Style>
+                    </ListBox.Styles>
+                <i:Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
+                        <ia:InvokeCommandAction Command="{Binding PlayProgram}"/>
+                    </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid VerticalAlignment="Center">
+                            <StackPanel HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                <TextBlock FontSize="32" Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right"
+                                        Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center"
+                                            Margin="0,0,10,0">
+                                    <TextBlock FontSize="42" Text="{Binding Key}"
+                                               HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Scale}"
+                                               HorizontalAlignment="Center"></TextBlock>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Patch}"
+                                           VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+        </DockPanel>
         
-        <Label>Patch</Label>
-        <ComboBox x:Name="patchBox"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center"
-                  SelectedIndex="0"
-                  SelectedValue="{Binding Patch}"
-                  ItemsSource="{Binding Patches}">
-        </ComboBox>
+        <Border
+            Background="DarkSlateGray"
+            Height="300"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            IsVisible="{Binding ShowPopup}">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button Command="{Binding ClosePopup}">X</Button>
+                
+                <DockPanel Width="200">
+                    <Label>Patch </Label>
+                    <ComboBox x:Name="patchBox"
+                              HorizontalAlignment="Stretch"
+                              SelectedIndex="0"
+                              SelectedValue="{Binding Patch}"
+                              ItemsSource="{Binding Patches}">
+                    </ComboBox>
+                </DockPanel>
+            
+                <DockPanel Width="200">
+                    <Label>Scale</Label>
+                    <ComboBox x:Name="scaleBox"
+                              HorizontalAlignment="Stretch"
+                              SelectedIndex="0"
+                              SelectedValue="{Binding Scale}"
+                              ItemsSource="{Binding Scales}">
+                    </ComboBox>
+                </DockPanel>
+                
+                <DockPanel Width="200">
+                    <Label>Key </Label>
+                    <ComboBox x:Name="keyBox"
+                              HorizontalAlignment="Stretch"
+                              SelectedIndex="0"
+                              SelectedValue="{Binding Key}"
+                              ItemsSource="{Binding Keys}">
+                    </ComboBox>
+                </DockPanel>
+                
+                <DockPanel Width="200">
+                    <Label>Name </Label>
+                    <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
+                </DockPanel>
+                
+                <Button Command="{Binding SaveProgram}">Save</Button>
+            </StackPanel>
+        </Border>
         
-        <Label>Scale</Label>
-        <ComboBox x:Name="scaleBox"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center"
-                  SelectedIndex="0"
-                  SelectedValue="{Binding Scale}"
-                  ItemsSource="{Binding Scales}">
-        </ComboBox>
-        
-        <Label>Key</Label>
-        <ComboBox x:Name="keyBox"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center"
-                  SelectedIndex="0"
-                  SelectedValue="{Binding Key}"
-                  ItemsSource="{Binding Keys}">
-        </ComboBox>
-        
-        <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
-        <Button Command="{Binding SaveProgram}">Save</Button>
-        <ListBox ItemsSource="{Binding Programs}"
-                 SelectedValue="{Binding SelectedProgram}"
-                 x:Name="ProgramList">
-            <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
-                    <ia:InvokeCommandAction Command="{Binding PlayProgram}"/>
-                </ia:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Patch}"></TextBlock>
-                        <TextBlock Text="{Binding Scale}"></TextBlock>
-                        <TextBlock Text="{Binding Key}"></TextBlock>
-                        <TextBlock Text="{Binding Name}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button Command="{Binding GoBack}">Back</Button>
-    </StackPanel>
+    </Grid>
 
 </UserControl>
