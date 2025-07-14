@@ -17,7 +17,7 @@ using ReactiveUI;
 
 namespace AeroPadPlayer.Views;
 
-public partial class MainView : UserControl, IViewFor<MainViewModel>
+public partial class MainView : ReactiveUserControl<MainViewModel>
 {
     
     private MainViewModel _viewModel;
@@ -29,14 +29,10 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
     private Aeropad aeropad;
     private Playback playback;
 
-    private MainViewModel viewModel;
-    
     private Program currentProgram;
 
     public MainView()
     {
-        viewModel = (MainViewModel)DataContext;
-        
         InitializeComponent();
     
         buttons = new List<Button>()
@@ -54,20 +50,13 @@ public partial class MainView : UserControl, IViewFor<MainViewModel>
             ASButton,
             BButton,
         };
+        
+        SettingsButton.IsEnabled = true;
 
         patchBox.SelectedValue = ViewModel?.Patch;
         scaleBox.SelectedValue = ViewModel?.Scale;
     }
     
-    // These two properties are required by IViewFor<TViewModel>
-    object? IViewFor.ViewModel
-    {
-        get => ViewModel;
-        set => ViewModel = (MainViewModel?)value;
-    }
-
-    public MainViewModel? ViewModel { get; set; }
-
     public async void ButtonClick(object sender, RoutedEventArgs e)
     {
         var source = e.Source as Control;

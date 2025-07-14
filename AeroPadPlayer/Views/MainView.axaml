@@ -8,14 +8,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AeroPadPlayer.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
         <StackPanel>
                 <StackPanel HorizontalAlignment="Right">
-                        <Button Command="{Binding GoToSettings}">Settings</Button>
+                        <Button x:Name="SettingsButton" Command="{Binding GoToSettings}" IsEnabled="True">Settings</Button>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right">
                         <Button Command="{Binding GoToPrograms}">Programs</Button>

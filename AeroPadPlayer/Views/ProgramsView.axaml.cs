@@ -8,11 +8,10 @@ using ReactiveUI;
 
 namespace AeroPadPlayer.Views;
 
-public partial class ProgramsView : ReactiveUserControl<ProgramsView>
+public partial class ProgramsView : ReactiveUserControl<ProgramsViewModel>
 {
     public ProgramsView()
     {
         InitializeComponent();
     }
-    
 }

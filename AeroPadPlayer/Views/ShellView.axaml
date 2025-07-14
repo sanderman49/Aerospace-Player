@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:AeroPadPlayer.ViewModels"
+             xmlns:rxui="using:Avalonia.ReactiveUI"
+             x:Class="AeroPadPlayer.Views.ShellView"
+             x:DataType="vm:ShellViewModel">
+    
+    <rxui:RoutedViewHost Router="{Binding Router}"></rxui:RoutedViewHost>
+</UserControl>

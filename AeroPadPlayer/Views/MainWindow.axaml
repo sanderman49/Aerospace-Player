@@ -11,9 +11,6 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="AeroPadPlayer">
-        <Design.DataContext>
-                <vm:MainWindowViewModel/>
-        </Design.DataContext>
         
-        <rxui:RoutedViewHost Router="{Binding Router}"/>
+        <views:ShellView/>
 </Window>

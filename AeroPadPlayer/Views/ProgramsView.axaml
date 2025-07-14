@@ -36,7 +36,7 @@
                     </ListBox.Styles>
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
-                        <ia:InvokeCommandAction Command="{Binding PlayProgram}"/>
+                        <ia:InvokeCommandAction Command="{Binding Play}"/>
                     </ia:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
                 <ListBox.ItemTemplate>
@@ -110,10 +110,9 @@
                     <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
                 </DockPanel>
                 
-                <Button Command="{Binding SaveProgram}">Save</Button>
+                <Button Command="{Binding Save}">Save</Button>
             </StackPanel>
         </Border>
-        
     </Grid>
 
 </UserControl>

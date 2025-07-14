@@ -22,6 +22,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var shell = new ShellViewModel();
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
@@ -29,22 +31,27 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             
             Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetExecutingAssembly());
-            
+
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel()
+                DataContext = shell
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
+            //Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetExecutingAssembly());
+            Locator.CurrentMutable.Register(() => new ShellView(), typeof(IViewFor<ShellViewModel>));
+            Locator.CurrentMutable.Register(() => new MainView(), typeof(IViewFor<MainViewModel>));
+            Locator.CurrentMutable.Register(() => new SettingsView(), typeof(IViewFor<SettingsViewModel>));
+            Locator.CurrentMutable.Register(() => new ProgramsView(), typeof(IViewFor<ProgramsViewModel>));
+            
+            singleViewPlatform.MainView = new ShellView
             {
-                DataContext = new MainWindowViewModel()
+                DataContext = shell
             };
         }
 
         base.OnFrameworkInitializationCompleted();
-        
     }
 
     private void DisableAvaloniaDataAnnotationValidation()

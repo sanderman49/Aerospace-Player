@@ -28,6 +28,8 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     public string? UrlPathSegment { get; } = Guid.NewGuid().ToString().Substring(0, 5);
 
     public ICommand GoToSettings { get; }
+    public ICommand GoToPrograms { get; }
+    public ICommand Play { get; }
 
     public ICommand SaveProgram { get; }
     public ICommand PlayProgram { get; }
@@ -82,16 +84,21 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         
         Player = new Playback();
 
-        GoToSettings = ReactiveCommand.CreateFromObservable(() => 
-            HostScreen.Router.Navigate.Execute(new SettingsViewModel(HostScreen))
+        GoToSettings = new RelayCommand(() =>
+            {
+                HostScreen.Router.Navigate.Execute(new SettingsViewModel(HostScreen));
+            }
         );
-
+        
         programsViewModel = new ProgramsViewModel(HostScreen, Player);
+
+        Play = ReactiveCommand.Create<string>(PlayPad);
+        GoToPrograms = ReactiveCommand.Create(() => HostScreen.Router.Navigate.Execute(programsViewModel).Subscribe());
 
         Config.GenerateConfigPath();
     }
 
-    public void Play(string key)
+    public void PlayPad(string key)
     {
         string patch = Patch?.Content?.ToString() ?? "";
         string scale = Scale?.Content?.ToString() ?? "";
@@ -120,7 +127,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         Task.Run(() => Player.PlayPad(patch, scale, key));
     }
 
-    public void GoToPrograms()
+    public void ToPrograms()
     {
         HostScreen.Router.Navigate.Execute(programsViewModel);
     }

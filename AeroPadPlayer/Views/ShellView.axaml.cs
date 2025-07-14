@@ -7,11 +7,10 @@ using ReactiveUI;
 
 namespace AeroPadPlayer.Views;
 
-public partial class FirstView : ReactiveUserControl<FirstViewModel>
+public partial class ShellView : ReactiveUserControl<ShellViewModel>
 {
-    public FirstView()
+    public ShellView()
     {
-        this.WhenActivated(disposables => { });
-        AvaloniaXamlLoader.Load(this);
+        InitializeComponent();
     }
 }

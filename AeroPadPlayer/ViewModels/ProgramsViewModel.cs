@@ -18,8 +18,11 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     public IScreen HostScreen { get; }
     public string? UrlPathSegment { get; } = Guid.NewGuid().ToString().Substring(0, 5);
     
-    // The command that navigates a user back.
-    public ReactiveCommand<Unit, IRoutableViewModel> GoBack => HostScreen.Router.NavigateBack;
+    public ICommand GoBack { get;  }
+    public ICommand Play { get; }
+    public ICommand Save { get; }
+    public ICommand OpenPopup { get; }
+    public ICommand ClosePopup { get; }
 
     public Playback Player { get; set; }
     
@@ -56,6 +59,12 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
         Aeropad = new Aeropad();
         Programs = new ObservableCollection<Program>();
 
+        Play = ReactiveCommand.Create(PlayProgram);
+        Save = ReactiveCommand.Create(SaveProgram);
+        GoBack = ReactiveCommand.Create(() => HostScreen.Router.NavigationStack.Remove(this));
+        OpenPopup = ReactiveCommand.Create(() => ShowPopup = true);
+        ClosePopup = ReactiveCommand.Create(() => ShowPopup = false);
+
         Patches = Aeropad.Patches;
         Scales = Aeropad.Scales;
         Keys = Aeropad.Keys;
@@ -86,15 +95,4 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
         // null means the Combobox hasn't been touched by the user.
         Programs.Add(new Program(Patch ?? Patches[0], Scale ?? Scales[0], Key ?? Keys[0], Name));
     }
-
-    public void OpenPopup()
-    {
-        ShowPopup = true;
-    }
-    
-    public void ClosePopup()
-    {
-        ShowPopup = false;
-    }
-        
 }
