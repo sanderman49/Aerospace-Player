@@ -35,7 +35,7 @@ public class Aeropad
         Keys[0] = "C";
         Keys[1] = "C#";
         Keys[2] = "D";
-        Keys[3] = "D";
+        Keys[3] = "D#";
         Keys[4] = "E";
         Keys[5] = "F";
         Keys[6] = "F#";
