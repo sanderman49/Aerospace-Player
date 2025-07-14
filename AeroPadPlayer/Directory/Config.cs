@@ -1,6 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Reactive.Linq;
 using System.Runtime.InteropServices;
+using System.Text.Json;
+using AeroPadPlayer.Models;
 
 namespace aeropad_player.Directory;
 
@@ -34,6 +39,48 @@ public class Config
         }
 
         return "";
+    }
+
+    public static void SavePrograms(ObservableCollection<Program> programs)
+    {
+        JsonSerializerOptions options = new()
+        {
+            WriteIndented = true
+        };
+        
+        var serializedPrograms = JsonSerializer.Serialize(programs, options);
+
+        string programsPath = GetProgramsPath();
+        
+        File.WriteAllText(programsPath, serializedPrograms);
+    }
+    
+    public static ObservableCollection<Program>? GetPrograms()
+    {
+        string programsPath = GetProgramsPath();
+
+        string serializedPrograms;
+
+        try
+        {
+            serializedPrograms = File.ReadAllText(programsPath);
+        }
+        catch (FileNotFoundException)
+        {
+            return new ObservableCollection<Program>();
+        }
+
+        var programs = JsonSerializer.Deserialize<ObservableCollection<Program>>(serializedPrograms);
+
+        return programs;
+    }
+
+    public static string GetProgramsPath()
+    {
+        var configPath = GetConfigPath();
+        var programsPath = Path.Join(configPath, "programs.json");
+
+        return programsPath;
     }
     
     // The 'sounds' directory within the config directory.

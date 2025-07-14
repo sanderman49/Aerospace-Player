@@ -7,9 +7,9 @@ public class Program : ObservableObject
     public string? Id { get => $"{Name}{Patch}{Scale}{Key}"; }
     public string? Name { get; set; }
     
-    public string Patch { get; set; }
-    public string Scale { get; set; }
-    public string Key { get; set; }
+    public string Patch { get; set; } = null!;
+    public string Scale { get; set; } = null!;
+    public string Key { get; set; } = null!;
 
     public Program(string patch, string scale, string key, string name)
     {
@@ -24,5 +24,10 @@ public class Program : ObservableObject
         Patch = patch;
         Scale = scale;
         Key = key;
+    }
+
+    public Program()
+    {
+        
     }
 }

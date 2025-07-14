@@ -10,28 +10,28 @@
              x:DataType="vm:ProgramsViewModel">
     
     
-    <Grid>
+    <Grid Background="#1a1b26">
         <DockPanel>
             <StackPanel Orientation="Horizontal"
                         DockPanel.Dock="Top"
-                        HorizontalAlignment="Stretch">
-                <Button Command="{Binding GoBack}"
-                        HorizontalAlignment="Left"
-                        FontSize="32"
-                        Background="Transparent">&lt;-</Button>
+                        Margin="15"
+                        HorizontalAlignment="Right">
                 <Button Command="{Binding OpenPopup}"
-                        HorizontalAlignment="Right"
                         FontSize="32"
                         Background="Transparent">+</Button>
             </StackPanel>
             
             <ListBox ItemsSource="{Binding Programs}"
                      SelectedValue="{Binding SelectedProgram}"
-                     Background="Black"
+                     Background="#1a1b26"
                      x:Name="ProgramList">
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
-                            <Setter Property="Background" Value="#333333"/>
+                            <Setter Property="Background" Value="#1a1b26"/>
+                            <Setter Property="BorderThickness" Value="2"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="Margin" Value="15,8,15,8"/>
+                            <Setter Property="CornerRadius" Value="8"/>
                         </Style>
                     </ListBox.Styles>
                 <i:Interaction.Behaviors>
@@ -41,22 +41,23 @@
                 </i:Interaction.Behaviors>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid VerticalAlignment="Center">
+                        <Grid VerticalAlignment="Center"
+                              Margin="5">
                             <StackPanel HorizontalAlignment="Left"
                                         VerticalAlignment="Center">
                                 <TextBlock FontSize="32" Text="{Binding Name}"></TextBlock>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right"
                                         Orientation="Horizontal">
+                                <TextBlock Text="{Binding Patch}"
+                                           VerticalAlignment="Center"></TextBlock>
                                 <StackPanel VerticalAlignment="Center"
-                                            Margin="0,0,10,0">
+                                            Margin="15,0,0,0">
                                     <TextBlock FontSize="42" Text="{Binding Key}"
                                                HorizontalAlignment="Center"></TextBlock>
                                     <TextBlock Text="{Binding Scale}"
                                                HorizontalAlignment="Center"></TextBlock>
                                 </StackPanel>
-                                <TextBlock Text="{Binding Patch}"
-                                           VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

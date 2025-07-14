@@ -49,7 +49,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
 
     
-    public Playback Player;
+    private Playback _player;
     private Config config;
 
     public ComboBoxItem Patch { get; set; }
@@ -62,7 +62,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     public string ActiveKey = "";
 
 
-    public MainViewModel(IScreen screen)
+    public MainViewModel(IScreen screen, Playback player)
     {
         Opacities = new AvaloniaList<float>()
         {
@@ -82,7 +82,8 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         
         HostScreen = screen;
         
-        Player = new Playback();
+        //Player = new Playback();
+        _player = player;
 
         GoToSettings = new RelayCommand(() =>
             {
@@ -90,7 +91,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
             }
         );
         
-        programsViewModel = new ProgramsViewModel(HostScreen, Player);
+        programsViewModel = new ProgramsViewModel(HostScreen, _player);
 
         Play = ReactiveCommand.Create<string>(PlayPad);
         GoToPrograms = ReactiveCommand.Create(() => HostScreen.Router.Navigate.Execute(programsViewModel).Subscribe());
@@ -124,7 +125,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         Opacities[OpacityKeyToIndex(key)] = activeOpacity;
         
         // Play the current note.
-        Task.Run(() => Player.PlayPad(patch, scale, key));
+        Task.Run(() => _player.PlayPad(patch, scale, key));
     }
 
     public void ToPrograms()
