@@ -23,4 +23,5 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
     {
         InitializeComponent();
     }
+    
 }

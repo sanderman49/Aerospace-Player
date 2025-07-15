@@ -7,13 +7,12 @@
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              x:DataType="vm:ShellViewModel">
     
-    <Grid RowDefinitions="*,50" Background="#1a1b26">
+    <Grid RowDefinitions="*,50">
         <rxui:RoutedViewHost Router="{Binding Router}"
                              Grid.Row="0"/>
         
         <StackPanel HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"
-                    Background="#1a1b26"
                     Grid.Row="1">
             <TabStrip HorizontalAlignment="Center">
                 <TabItem x:Name="MainTab" Header="Main"></TabItem>

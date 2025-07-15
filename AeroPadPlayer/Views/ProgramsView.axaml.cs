@@ -1,7 +1,9 @@
+using System;
 using AeroPadPlayer.Models;
 using AeroPadPlayer.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
@@ -14,4 +16,5 @@ public partial class ProgramsView : ReactiveUserControl<ProgramsViewModel>
     {
         InitializeComponent();
     }
+    
 }

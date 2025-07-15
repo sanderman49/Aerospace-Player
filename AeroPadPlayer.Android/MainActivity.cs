@@ -1,5 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
+using Android.Graphics;
+using Android.Graphics.Drawables;
+using Android.OS;
+using Android.Views;
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
@@ -19,5 +23,14 @@ public class MainActivity : AvaloniaMainActivity<App>
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
+    }
+
+    protected override void OnCreate(Bundle? savedInstanceState)
+    {
+        base.OnCreate(savedInstanceState);
+        
+        Window?.SetBackgroundDrawable(new ColorDrawable(Color.ParseColor("#1a126b")));
+        Window?.SetStatusBarColor(Color.ParseColor("#1a126b"));
+        Window?.SetNavigationBarColor(Color.ParseColor("#1a126b"));
     }
 }

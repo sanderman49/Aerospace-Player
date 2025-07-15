@@ -10,7 +10,7 @@
              x:DataType="vm:ProgramsViewModel">
     
     
-    <Grid Background="#1a1b26">
+    <Grid>
         <DockPanel>
             <StackPanel Orientation="Horizontal"
                         DockPanel.Dock="Top"
@@ -23,11 +23,11 @@
             
             <ListBox ItemsSource="{Binding Programs}"
                      SelectedValue="{Binding SelectedProgram}"
-                     Background="#1a1b26"
+                     Background="Transparent"
                      x:Name="ProgramList">
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
-                            <Setter Property="Background" Value="#1a1b26"/>
+                            <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="BorderThickness" Value="2"/>
                             <Setter Property="BorderBrush" Value="White"/>
                             <Setter Property="Margin" Value="15,8,15,8"/>
@@ -45,7 +45,8 @@
                               Margin="5">
                             <StackPanel HorizontalAlignment="Left"
                                         VerticalAlignment="Center">
-                                <TextBlock FontSize="32" Text="{Binding Name}"></TextBlock>
+                                <TextBlock FontSize="32"
+                                           Text="{Binding Name}"></TextBlock>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right"
                                         Orientation="Horizontal">
@@ -53,7 +54,8 @@
                                            VerticalAlignment="Center"></TextBlock>
                                 <StackPanel VerticalAlignment="Center"
                                             Margin="15,0,0,0">
-                                    <TextBlock FontSize="42" Text="{Binding Key}"
+                                    <TextBlock FontSize="42" 
+                                               Text="{Binding Key}"
                                                HorizontalAlignment="Center"></TextBlock>
                                     <TextBlock Text="{Binding Scale}"
                                                HorizontalAlignment="Center"></TextBlock>

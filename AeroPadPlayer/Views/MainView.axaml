@@ -3,208 +3,143 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:AeroPadPlayer.ViewModels"
+             xmlns:System="using:System"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AeroPadPlayer.Views.MainView"
              x:DataType="vm:MainViewModel">
-        <DockPanel VerticalAlignment="Stretch" Background="#1a1b26">
+        <UserControl.Styles>
+                <Style Selector="Button.Key">
+                        <Setter Property="Width" Value="{OnFormFactor Desktop=125.0, Mobile=100.0, x:TypeArguments=System:Double}"/>
+                        <Setter Property="Height" Value="{OnFormFactor Desktop=125.0, Mobile=100.0, x:TypeArguments=System:Double}"/>
+                        <Setter Property="Margin" Value="8"/>
+                        <Setter Property="Background" Value="transparent"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="CornerRadius" Value="8"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="{OnFormFactor Desktop=64, Mobile=46, x:TypeArguments=System:Double}"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Command" Value="{Binding Play}"/>
+                </Style>
+        </UserControl.Styles>
+        <DockPanel VerticalAlignment="Stretch">
                 <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Right">
                         <Button x:Name="SettingsButton" Command="{Binding GoToSettings}" IsEnabled="True">Settings</Button>
                 </StackPanel>
-                <StackPanel VerticalAlignment="Center">
-                        <StackPanel VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                <Label VerticalAlignment="Center"
-                                               HorizontalAlignment="Center">Patch</Label>
-                                <ComboBox x:Name="patchBox"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          SelectedIndex="{Binding PatchIndex}"
-                                          SelectedValue="{Binding Patch}">
-                                        <ComboBoxItem>Exosphere</ComboBoxItem>
-                                        <ComboBoxItem>Thermosphere</ComboBoxItem>
-                                        <ComboBoxItem>Mesosphere</ComboBoxItem>
-                                        <ComboBoxItem>Stratosphere</ComboBoxItem>
-                                        <ComboBoxItem>Troposphere</ComboBoxItem>
-                                        
-                                        <ComboBoxItem>Gravity</ComboBoxItem>
-                                        <ComboBoxItem>Inertia</ComboBoxItem>
-                                        <ComboBoxItem>Satellite</ComboBoxItem>
-                                        <ComboBoxItem>Aphelion</ComboBoxItem>
-                                        <ComboBoxItem>Perihelion</ComboBoxItem>
-                                </ComboBox>
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <Label VerticalAlignment="Center"
+                               HorizontalAlignment="Center">Patch</Label>
+                        <ComboBox x:Name="patchBox"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding PatchIndex}"
+                                  SelectedValue="{Binding Patch}">
+                                <ComboBoxItem>Exosphere</ComboBoxItem>
+                                <ComboBoxItem>Thermosphere</ComboBoxItem>
+                                <ComboBoxItem>Mesosphere</ComboBoxItem>
+                                <ComboBoxItem>Stratosphere</ComboBoxItem>
+                                <ComboBoxItem>Troposphere</ComboBoxItem>
                                 
-                                <Label VerticalAlignment="Center"
-                                       HorizontalAlignment="Center">Scale</Label>
-                                <ComboBox x:Name="scaleBox"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          SelectedIndex="{Binding ScaleIndex}"
-                                          SelectedValue="{Binding Scale}">
-                                        <ComboBoxItem>Major</ComboBoxItem>
-                                        <ComboBoxItem>Neutral</ComboBoxItem>
-                                        <ComboBoxItem>Minor</ComboBoxItem>
-                                </ComboBox>
-                                
-                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"></RowDefinition>
-                                                <RowDefinition Height="Auto"></RowDefinition>
-                                                <RowDefinition Height="Auto"></RowDefinition>
-                                                <RowDefinition Height="Auto"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="0"
-                                                Grid.Row="0"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[0]}"
-                                                CommandParameter="C"
-                                                x:Name="CButton">C</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="1"
-                                                Grid.Row="0"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[1]}"
-                                                CommandParameter="C#"
-                                                x:Name="CSButton">C#</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="2"
-                                                Grid.Row="0"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[2]}"
-                                                CommandParameter="D"
-                                                x:Name="DButton">D</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="0"
-                                                Grid.Row="1"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[3]}"
-                                                CommandParameter="D#"
-                                                x:Name="DSButton">D#</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="1"
-                                                Grid.Row="1"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[4]}"
-                                                CommandParameter="E"
-                                                x:Name="EButton">E</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="2"
-                                                Grid.Row="1"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[5]}"
-                                                CommandParameter="F"
-                                                x:Name="FButton">F</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="0"
-                                                Grid.Row="2"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[6]}"
-                                                CommandParameter="F#"
-                                                x:Name="FSButton">F#</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="1"
-                                                Grid.Row="2"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[7]}"
-                                                CommandParameter="G"
-                                                x:Name="GButton">G</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="2"
-                                                Grid.Row="2"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[8]}"
-                                                CommandParameter="G#"
-                                                x:Name="GSButton">G#</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="0"
-                                                Grid.Row="3"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[9]}"
-                                                CommandParameter="A"
-                                                x:Name="AButton">A</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="1"
-                                                Grid.Row="3"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[10]}"
-                                                CommandParameter="A#"
-                                                x:Name="ASButton">A#</Button>
-                                        <Button Width="80"
-                                                Height="80"
-                                                Grid.Column="2"
-                                                Grid.Row="3"
-                                                HorizontalContentAlignment="Center"
-                                                VerticalContentAlignment="Center" 
-                                                FontSize="35"
-                                                FontWeight="Bold"
-                                                Command="{Binding Play}"
-                                                Opacity="{Binding Opacities[11]}"
-                                                CommandParameter="B"
-                                                x:Name="BButton">B</Button>
-                                </Grid>
-                        </StackPanel>
+                                <ComboBoxItem>Gravity</ComboBoxItem>
+                                <ComboBoxItem>Inertia</ComboBoxItem>
+                                <ComboBoxItem>Satellite</ComboBoxItem>
+                                <ComboBoxItem>Aphelion</ComboBoxItem>
+                                <ComboBoxItem>Perihelion</ComboBoxItem>
+                        </ComboBox>
+                        
+                        <Label VerticalAlignment="Center"
+                               HorizontalAlignment="Center">Scale</Label>
+                        <ComboBox x:Name="scaleBox"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding ScaleIndex}"
+                                  SelectedValue="{Binding Scale}">
+                                <ComboBoxItem>Major</ComboBoxItem>
+                                <ComboBoxItem>Neutral</ComboBoxItem>
+                                <ComboBoxItem>Minor</ComboBoxItem>
+                        </ComboBox>
+                        
+                        <Grid VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              ColumnDefinitions="1*,1*,1*"
+                              RowDefinitions="*,*,*,*">
+                                <Button Grid.Column="0"
+                                        Grid.Row="0"
+                                        Opacity="{Binding Opacities[0]}"
+                                        CommandParameter="C"
+                                        Classes="Key"
+                                        x:Name="CButton">C</Button>
+                                <Button Grid.Column="1"
+                                        Grid.Row="0"
+                                        Opacity="{Binding Opacities[1]}"
+                                        CommandParameter="C#"
+                                        Classes="Key"
+                                        x:Name="CSButton">C#</Button>
+                                <Button Grid.Column="2"
+                                        Grid.Row="0"
+                                        Opacity="{Binding Opacities[2]}"
+                                        CommandParameter="D"
+                                        Classes="Key"
+                                        x:Name="DButton">D</Button>
+                                <Button Grid.Column="0"
+                                        Grid.Row="1"
+                                        Opacity="{Binding Opacities[3]}"
+                                        CommandParameter="D#"
+                                        Classes="Key"
+                                        x:Name="DSButton">D#</Button>
+                                <Button Grid.Column="1"
+                                        Grid.Row="1"
+                                        Opacity="{Binding Opacities[4]}"
+                                        CommandParameter="E"
+                                        Classes="Key"
+                                        x:Name="EButton">E</Button>
+                                <Button Grid.Column="2"
+                                        Grid.Row="1"
+                                        Opacity="{Binding Opacities[5]}"
+                                        CommandParameter="F"
+                                        Classes="Key"
+                                        x:Name="FButton">F</Button>
+                                <Button Grid.Column="0"
+                                        Grid.Row="2"
+                                        Opacity="{Binding Opacities[6]}"
+                                        CommandParameter="F#"
+                                        Classes="Key"
+                                        x:Name="FSButton">F#</Button>
+                                <Button Grid.Column="1"
+                                        Grid.Row="2"
+                                        Opacity="{Binding Opacities[7]}"
+                                        CommandParameter="G"
+                                        Classes="Key"
+                                        x:Name="GButton">G</Button>
+                                <Button Grid.Column="2"
+                                        Grid.Row="2"
+                                        Opacity="{Binding Opacities[8]}"
+                                        CommandParameter="G#"
+                                        Classes="Key"
+                                        x:Name="GSButton">G#</Button>
+                                <Button Grid.Column="0"
+                                        Grid.Row="3"
+                                        Opacity="{Binding Opacities[9]}"
+                                        CommandParameter="A"
+                                        Classes="Key"
+                                        x:Name="AButton">A</Button>
+                                <Button Grid.Column="1"
+                                        Grid.Row="3"
+                                        Opacity="{Binding Opacities[10]}"
+                                        CommandParameter="A#"
+                                        Classes="Key"
+                                        x:Name="ASButton">A#</Button>
+                                <Button Grid.Column="2"
+                                        Grid.Row="3"
+                                        Opacity="{Binding Opacities[11]}"
+                                        CommandParameter="B"
+                                        Classes="Key"
+                                        x:Name="BButton">B</Button>
+                        </Grid>
                 </StackPanel>
         </DockPanel>
 </UserControl>

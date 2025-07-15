@@ -17,8 +17,26 @@
             <views:SettingsView/>
         </DataTemplate>
     </Application.DataTemplates>
+    
+    <Application.Resources>
+        <FontFamily x:Key="OpenSans">avares://AeroPadPlayer/Assets/Fonts/OpenSans#Open Sans</FontFamily>
+    </Application.Resources>
+    
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme/>
+        
+        <Style Selector="Button, Label, TabStripItem, TextBox, ComboBox">
+            <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+        </Style>
+        
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+        </Style>
+        
+        
+        <Style Selector=":is(TopLevel), Window">
+            <Setter Property="Background" Value="#1a1b26"/>
+        </Style>
     </Application.Styles>
              
 </Application>
