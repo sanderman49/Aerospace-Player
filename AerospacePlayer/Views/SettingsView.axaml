@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AerospacePlayer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AerospacePlayer.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+    <StackPanel>
+        <Button Command="{Binding GoBack}"
+                HorizontalAlignment="Left"
+                FontSize="32"
+                Background="Transparent">&lt;-</Button>
+        <Button Click="FileWizard">Import AeroPads</Button>
+    </StackPanel>
+
+</UserControl>
