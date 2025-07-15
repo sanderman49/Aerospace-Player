@@ -44,6 +44,7 @@ public partial class App : Application
             Locator.CurrentMutable.Register(() => new MainView(), typeof(IViewFor<MainViewModel>));
             Locator.CurrentMutable.Register(() => new SettingsView(), typeof(IViewFor<SettingsViewModel>));
             Locator.CurrentMutable.Register(() => new ProgramsView(), typeof(IViewFor<ProgramsViewModel>));
+            Locator.CurrentMutable.Register(() => new EditProgramView(), typeof(IViewFor<EditProgramViewModel>));
             
             singleViewPlatform.MainView = new ShellView
             {

@@ -21,8 +21,10 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand Play { get; }
     public ICommand Save { get; }
-    public ICommand OpenPopup { get; }
-    public ICommand ClosePopup { get; }
+    public ICommand OpenAddPopup { get; }
+    public ICommand CloseAddPopup { get; }
+    public ICommand OpenDeletePopup { get; }
+    public ICommand GoToEditProgram { get; }
 
     
     private Program? _selectedProgram;
@@ -60,8 +62,13 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
 
         Play = ReactiveCommand.Create(PlayProgram);
         Save = ReactiveCommand.Create(SaveProgram);
-        OpenPopup = ReactiveCommand.Create(() => ShowPopup = true);
-        ClosePopup = ReactiveCommand.Create(() => ShowPopup = false);
+        
+        GoToEditProgram = ReactiveCommand.Create<Program>((program) => HostScreen.Router.Navigate.Execute(new EditProgramViewModel(HostScreen, program, Programs)));
+        
+        OpenAddPopup = ReactiveCommand.Create(() => ShowPopup = true);
+        CloseAddPopup = ReactiveCommand.Create(() => ShowPopup = false);
+        
+        OpenDeletePopup = ReactiveCommand.Create(() => ShowPopup = true);
 
         Patches = _aeropad.Patches;
         Scales = _aeropad.Scales;
@@ -70,7 +77,7 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
 
     private void PlayProgram()
     {
-        if (SelectedProgram?.Id == _player.CurrentProgram?.Id)
+        if (SelectedProgram?.Signature == _player.CurrentProgram?.Signature)
         {
             _player.CurrentProgram = null;
             SelectedProgram = null;
@@ -83,7 +90,7 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     
     public void OnViewLoad()
     {
-        if (_player.CurrentProgram?.Id != SelectedProgram?.Id)
+        if (_player.CurrentProgram?.Signature != SelectedProgram?.Signature)
         {
             SelectedProgram = null;
         }

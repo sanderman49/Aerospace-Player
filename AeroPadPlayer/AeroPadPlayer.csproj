@@ -37,5 +37,9 @@
         <DependentUpon>ProgramsView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\EditProgramView.axaml.cs">
+        <DependentUpon>EditProgramView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@
                         DockPanel.Dock="Top"
                         Margin="15"
                         HorizontalAlignment="Right">
-                <Button Command="{Binding OpenPopup}"
+                <Button Command="{Binding OpenAddPopup}"
                         FontSize="32"
                         Background="Transparent">+</Button>
             </StackPanel>
@@ -26,15 +26,15 @@
                      SelectedValue="{Binding SelectedProgram}"
                      Background="Transparent"
                      x:Name="ProgramList">
-                    <ListBox.Styles>
-                        <Style Selector="ListBoxItem">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="BorderThickness" Value="2"/>
-                            <Setter Property="BorderBrush" Value="White"/>
-                            <Setter Property="Margin" Value="15,8,15,8"/>
-                            <Setter Property="CornerRadius" Value="8"/>
-                        </Style>
-                    </ListBox.Styles>
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="Margin" Value="15,8,15,8"/>
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </ListBox.Styles>
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
                         <ia:InvokeCommandAction Command="{Binding Play}"/>
@@ -61,6 +61,7 @@
                                     <TextBlock Text="{Binding Scale}"
                                                HorizontalAlignment="Center"></TextBlock>
                                 </StackPanel>
+                                <Button Command="{CompiledBinding #ProgramList.((vm:ProgramsViewModel)DataContext).GoToEditProgram}" CommandParameter="{Binding}">Edit</Button>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
@@ -77,7 +78,7 @@
             IsVisible="{Binding ShowPopup}">
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                <Button Command="{Binding ClosePopup}">X</Button>
+                <Button Command="{Binding CloseAddPopup}">X</Button>
                 
                 <DockPanel Width="200">
                     <Label>Patch </Label>

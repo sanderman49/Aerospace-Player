@@ -1,10 +1,13 @@
+using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AeroPadPlayer.Models;
 
 public class Program : ObservableObject
 {
-    public string? Id { get => $"{Name}{Patch}{Scale}{Key}"; }
+    public string Signature { get => $"{Name}{Patch}{Scale}{Key}"; }
+    public string Id { get; }
+    
     public string? Name { get; set; }
     
     public string Patch { get; set; } = null!;
@@ -17,6 +20,8 @@ public class Program : ObservableObject
         Scale = scale;
         Key = key;
         Name = name;
+        
+        Id = Guid.NewGuid().ToString();
     }
     
     public Program(string patch, string scale, string key)
@@ -24,10 +29,12 @@ public class Program : ObservableObject
         Patch = patch;
         Scale = scale;
         Key = key;
+
+        Id = Guid.NewGuid().ToString();
     }
 
     public Program()
     {
-        
+        Id = Guid.NewGuid().ToString();
     }
 }

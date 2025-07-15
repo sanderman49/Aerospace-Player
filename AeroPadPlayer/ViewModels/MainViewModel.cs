@@ -83,7 +83,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
         Program selectedProgram = new Program(Patch ?? Patches[0], Scale ?? Scales[0], key);
 
-        if (_player.CurrentProgram?.Id == selectedProgram.Id)
+        if (_player.CurrentProgram?.Signature == selectedProgram.Signature)
         {
             _player.CurrentProgram = null;
         }
