@@ -17,4 +17,10 @@ public partial class ProgramsView : ReactiveUserControl<ProgramsViewModel>
         InitializeComponent();
     }
     
+    public void OnViewLoad(object? sender, RoutedEventArgs e)
+    {
+        var _viewModel = (ProgramsViewModel)DataContext;
+        
+        _viewModel.OnViewLoad();
+    }
 }

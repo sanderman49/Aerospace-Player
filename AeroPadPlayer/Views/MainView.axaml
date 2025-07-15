@@ -6,6 +6,7 @@
              xmlns:System="using:System"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             Loaded="OnViewLoad"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AeroPadPlayer.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -36,19 +37,9 @@
                         <ComboBox x:Name="patchBox"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Center"
-                                  SelectedIndex="{Binding PatchIndex}"
+                                  SelectedIndex="0"
+                                  ItemsSource="{Binding Patches}"
                                   SelectedValue="{Binding Patch}">
-                                <ComboBoxItem>Exosphere</ComboBoxItem>
-                                <ComboBoxItem>Thermosphere</ComboBoxItem>
-                                <ComboBoxItem>Mesosphere</ComboBoxItem>
-                                <ComboBoxItem>Stratosphere</ComboBoxItem>
-                                <ComboBoxItem>Troposphere</ComboBoxItem>
-                                
-                                <ComboBoxItem>Gravity</ComboBoxItem>
-                                <ComboBoxItem>Inertia</ComboBoxItem>
-                                <ComboBoxItem>Satellite</ComboBoxItem>
-                                <ComboBoxItem>Aphelion</ComboBoxItem>
-                                <ComboBoxItem>Perihelion</ComboBoxItem>
                         </ComboBox>
                         
                         <Label VerticalAlignment="Center"
@@ -56,11 +47,9 @@
                         <ComboBox x:Name="scaleBox"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Center"
-                                  SelectedIndex="{Binding ScaleIndex}"
+                                  SelectedIndex="0"
+                                  ItemsSource="{Binding Scales}"
                                   SelectedValue="{Binding Scale}">
-                                <ComboBoxItem>Major</ComboBoxItem>
-                                <ComboBoxItem>Neutral</ComboBoxItem>
-                                <ComboBoxItem>Minor</ComboBoxItem>
                         </ComboBox>
                         
                         <Grid VerticalAlignment="Center"

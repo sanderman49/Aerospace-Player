@@ -24,16 +24,15 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     public ICommand OpenPopup { get; }
     public ICommand ClosePopup { get; }
 
-    public Playback Player { get; set; }
     
     private Program? _selectedProgram;
     public Program? SelectedProgram { get => _selectedProgram; set => this.RaiseAndSetIfChanged(ref _selectedProgram, value); }
     
-    public Program? CurrentProgram { get; set; }
+
+    private readonly Aeropad _aeropad;
+    private readonly Playback _player;
     
-    public Aeropad Aeropad { get; }
-    
-    public ObservableCollection<Program>? Programs { get; set; }
+    public ObservableCollection<Program> Programs { get; set; }
     
     public string? Name { get; set; }
     public string? Patch { get; set; }
@@ -55,8 +54,8 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     public ProgramsViewModel(IScreen screen, Playback player)
     {
         HostScreen = screen;
-        Player = player;
-        Aeropad = new Aeropad();
+        _player = player;
+        _aeropad = new Aeropad();
         Programs = Config.GetPrograms();
 
         Play = ReactiveCommand.Create(PlayProgram);
@@ -64,33 +63,39 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
         OpenPopup = ReactiveCommand.Create(() => ShowPopup = true);
         ClosePopup = ReactiveCommand.Create(() => ShowPopup = false);
 
-        Patches = Aeropad.Patches;
-        Scales = Aeropad.Scales;
-        Keys = Aeropad.Keys;
+        Patches = _aeropad.Patches;
+        Scales = _aeropad.Scales;
+        Keys = _aeropad.Keys;
     }
 
-    public void PlayProgram()
+    private void PlayProgram()
     {
-        if (SelectedProgram?.Id == Player.CurrentProgram?.Id)
+        if (SelectedProgram?.Id == _player.CurrentProgram?.Id)
         {
-            //Task.Run(() => Player.StopPad());
-            Player.CurrentProgram = null;
+            _player.CurrentProgram = null;
             SelectedProgram = null;
-            return;
         }
-
-        Player.CurrentProgram = SelectedProgram;
-        
-        //string patch = Player.CurrentProgram.Patch;
-        //string scale = Player.CurrentProgram.Scale;
-        //string key = Player.CurrentProgram.Key;
-        
-        
-        //Task.Run(() => Player.PlayPad(patch, scale, key)); 
+        else
+        {
+            _player.CurrentProgram = SelectedProgram;
+        }
+    }
+    
+    public void OnViewLoad()
+    {
+        if (_player.CurrentProgram?.Id != SelectedProgram?.Id)
+        {
+            SelectedProgram = null;
+        }
     }
 
     public void SaveProgram()
     {
+        if (Name == null)
+        {
+            return;
+        }
+        
         // null means the Combobox hasn't been touched by the user.
         Programs.Add(new Program(Patch ?? Patches[0], Scale ?? Scales[0], Key ?? Keys[0], Name));
         

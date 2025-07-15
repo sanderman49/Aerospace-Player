@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using aeropad_player.Audio;
+using aeropad_player.Directory;
 using AeroPadPlayer.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -23,6 +24,8 @@ public class ShellViewModel : ViewModelBase, IScreen
 
     public ShellViewModel()
     {
+        Config.GenerateConfigPath();
+        
         Router = new RoutingState();
         _player = new Playback();
 

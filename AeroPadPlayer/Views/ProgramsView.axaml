@@ -6,6 +6,7 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Loaded="OnViewLoad"
              x:Class="AeroPadPlayer.Views.ProgramsView"
              x:DataType="vm:ProgramsViewModel">
     

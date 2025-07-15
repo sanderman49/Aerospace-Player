@@ -23,5 +23,11 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
     {
         InitializeComponent();
     }
-    
+
+    public void OnViewLoad(object? sender, RoutedEventArgs e)
+    {
+        var _viewModel = (MainViewModel)DataContext;
+        
+        _viewModel.OnViewLoad();
+    }
 }
