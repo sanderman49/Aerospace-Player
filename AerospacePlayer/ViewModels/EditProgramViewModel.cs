@@ -60,12 +60,16 @@ public partial class EditProgramViewModel : ViewModelBase, IRoutableViewModel
             _program.Scale = Scale ?? _program.Scale;
             _program.Key = Key ?? _program.Key;
             
+            Config.SavePrograms(_programs);
+            
             HostScreen.Router.NavigationStack.Remove(this);
         });
         
         Delete = ReactiveCommand.Create(() =>
         {
             _programs.Remove(_program);
+            
+            Config.SavePrograms(_programs);
             
             HostScreen.Router.NavigationStack.Remove(this);
         });
