@@ -25,4 +25,5 @@ public partial class ProgramsView : ReactiveUserControl<ProgramsViewModel>
         
         _viewModel.OnViewLoad();
     }
+
 }

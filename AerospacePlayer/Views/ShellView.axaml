@@ -13,21 +13,31 @@
         
         <StackPanel HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"
+                    IsVisible="{Binding Router.CurrentViewModel}"
                     Grid.Row="1">
-            <TabStrip HorizontalAlignment="Center">
-                <TabItem x:Name="MainTab" Header="Main"></TabItem>
-                <TabItem x:Name="ProgramsTab" Header="Programs"></TabItem>
-                
-                <i:Interaction.Behaviors>
-                    <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #MainTab}">
-                        <ia:InvokeCommandAction Command="{Binding GoToMain}"/>
-                    </ia:EventTriggerBehavior>
+                <TabStrip HorizontalAlignment="Stretch">
+                    <TabStrip.Styles>
+                        <Style Selector="TabStrip">
+                            <Setter Property="ItemsPanel">
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="{Binding $parent[TabStrip].Items.Count}"/>
+                                </ItemsPanelTemplate>
+                            </Setter>
+                        </Style>
+                    </TabStrip.Styles>                    
+                    <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="MainTab" Header="Main"></TabItem>
+                    <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="ProgramsTab" Header="Programs"></TabItem>
                     
-                    <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramsTab}">
-                        <ia:InvokeCommandAction Command="{Binding GoToPrograms}"/>
-                    </ia:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-            </TabStrip>
+                    <i:Interaction.Behaviors>
+                        <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #MainTab}">
+                            <ia:InvokeCommandAction Command="{Binding GoToMain}"/>
+                        </ia:EventTriggerBehavior>
+                        
+                        <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramsTab}">
+                            <ia:InvokeCommandAction Command="{Binding GoToPrograms}"/>
+                        </ia:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                </TabStrip>
         </StackPanel>
     </Grid>
 </UserControl>

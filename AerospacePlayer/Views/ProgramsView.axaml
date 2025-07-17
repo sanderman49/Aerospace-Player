@@ -18,12 +18,15 @@
                         Margin="15"
                         HorizontalAlignment="Right">
                 <Button Command="{Binding OpenAddPopup}"
-                        FontSize="32"
+                        Classes="Icon"
+                        FontFamily="{StaticResource FontAwesome}"
+                        FontWeight="Solid"
                         Background="Transparent">+</Button>
             </StackPanel>
             
             <ListBox ItemsSource="{Binding Programs}"
                      SelectedValue="{Binding SelectedProgram}"
+                     SelectionMode="Single, Toggle"
                      Background="Transparent"
                      x:Name="ProgramList">
                 <ListBox.Styles>
@@ -39,7 +42,7 @@
                     </Style>
                 </ListBox.Styles>
                 <i:Interaction.Behaviors>
-                    <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
+                    <ia:EventTriggerBehavior EventName="SelectionChanged" SourceObject="{Binding #ProgramList}">
                         <ia:InvokeCommandAction Command="{Binding Play}"/>
                     </ia:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
@@ -47,6 +50,14 @@
                     <DataTemplate>
                         <Grid VerticalAlignment="Center"
                               Margin="5">
+                            <Grid.Styles>
+                                <Style Selector="StackPanel">
+                                    <Setter Property="Margin" Value="10,0,10,0"></Setter>
+                                </Style>
+                                <Style Selector="Button, TextBlock">
+                                    <Setter Property="Margin" Value="0"></Setter>
+                                </Style>
+                            </Grid.Styles>
                             <StackPanel HorizontalAlignment="Left"
                                         VerticalAlignment="Center">
                                 <TextBlock FontSize="32"
@@ -56,8 +67,7 @@
                                         Orientation="Horizontal">
                                 <TextBlock Text="{Binding Patch}"
                                            VerticalAlignment="Center"></TextBlock>
-                                <StackPanel VerticalAlignment="Center"
-                                            Margin="15,0,15,0">
+                                <StackPanel VerticalAlignment="Center">
                                     <TextBlock FontSize="42" 
                                                Text="{Binding Key}"
                                                HorizontalAlignment="Center"></TextBlock>
@@ -77,16 +87,32 @@
         </DockPanel>
         
         <Border
-            Background="DarkSlateGray"
+            BorderBrush="White"
+            BorderThickness="0,2,0,0"
             Height="300"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Bottom"
             IsVisible="{Binding ShowPopup}">
+            <Border.Styles>
+                <Style Selector="Label">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </Border.Styles>
+            
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                <Button Command="{Binding CloseAddPopup}">X</Button>
                 
-                <DockPanel Width="200">
+                <Button Command="{Binding CloseAddPopup}"
+                        FontFamily="{StaticResource FontAwesome}"
+                        FontWeight="Solid"
+                        Classes="Icon"></Button>
+                
+                <DockPanel Width="300">
+                    <Label>Name </Label>
+                    <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
+                </DockPanel>
+                
+                <DockPanel Width="300">
                     <Label>Patch </Label>
                     <ComboBox x:Name="patchBox"
                               HorizontalAlignment="Stretch"
@@ -96,7 +122,7 @@
                     </ComboBox>
                 </DockPanel>
             
-                <DockPanel Width="200">
+                <DockPanel Width="300">
                     <Label>Scale</Label>
                     <ComboBox x:Name="scaleBox"
                               HorizontalAlignment="Stretch"
@@ -106,7 +132,7 @@
                     </ComboBox>
                 </DockPanel>
                 
-                <DockPanel Width="200">
+                <DockPanel Width="300">
                     <Label>Key </Label>
                     <ComboBox x:Name="keyBox"
                               HorizontalAlignment="Stretch"
@@ -116,12 +142,9 @@
                     </ComboBox>
                 </DockPanel>
                 
-                <DockPanel Width="200">
-                    <Label>Name </Label>
-                    <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
-                </DockPanel>
-                
-                <Button Command="{Binding Save}">Save</Button>
+                <Button Command="{Binding Save}"
+                        HorizontalAlignment="Right"
+                        Classes="Confirm">Save</Button>
             </StackPanel>
         </Border>
     </Grid>

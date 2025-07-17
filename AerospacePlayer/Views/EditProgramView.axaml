@@ -7,14 +7,27 @@
              x:Class="AerospacePlayer.Views.EditProgramView"
              x:DataType="vm:EditProgramViewModel">
     <StackPanel>
-        <Button Command="{Binding Delete}">Delete</Button>
         
-        <DockPanel Width="200">
+        <StackPanel Orientation="Horizontal"
+                    Margin="15"
+                    HorizontalAlignment="Right">
+            <Button Command="{Binding Delete}"
+                        FontFamily="{StaticResource FontAwesome}"
+                        FontWeight="Solid"
+                        Classes="Icon"></Button>
+        </StackPanel>
+        <StackPanel.Styles>
+            <Style Selector="Label">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+        </StackPanel.Styles>
+        
+        <DockPanel Width="300">
             <Label>Name </Label>
             <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
         </DockPanel>
         
-        <DockPanel Width="200">
+        <DockPanel Width="300">
             <Label>Patch </Label>
             <ComboBox x:Name="patchBox"
                       HorizontalAlignment="Stretch"
@@ -24,7 +37,7 @@
             </ComboBox>
         </DockPanel>
             
-        <DockPanel Width="200">
+        <DockPanel Width="300">
             <Label>Scale</Label>
             <ComboBox x:Name="scaleBox"
                       HorizontalAlignment="Stretch"
@@ -34,7 +47,7 @@
             </ComboBox>
         </DockPanel>
                 
-        <DockPanel Width="200">
+        <DockPanel Width="300">
             <Label>Key </Label>
             <ComboBox x:Name="keyBox"
                       HorizontalAlignment="Stretch"
@@ -44,12 +57,16 @@
             </ComboBox>
         </DockPanel>
         
-        <StackPanel VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-            <Button Command="{Binding Save}">Save</Button>
-            <Button Command="{Binding GoBack}">Cancel</Button>
-        </StackPanel>
+        <DockPanel Width="300">
+            <StackPanel VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                <Button Command="{Binding Save}"
+                        Classes="Confirm">Save</Button>
+                <Button Command="{Binding GoBack}"
+                        Classes="Cancel">Cancel</Button>
+            </StackPanel>
+        </DockPanel>
     </StackPanel>
 
 </UserControl>

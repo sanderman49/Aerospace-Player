@@ -29,31 +29,45 @@
                         <Setter Property="Background" Value="#414868"/>
                 </Style>
         </UserControl.Styles>
+        
         <DockPanel VerticalAlignment="Stretch">
-                <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Right">
-                        <Button x:Name="SettingsButton" Command="{Binding GoToSettings}" IsEnabled="True">Settings</Button>
+                <StackPanel Orientation="Horizontal"
+                            DockPanel.Dock="Top"
+                            Margin="15"
+                            HorizontalAlignment="Right">
+                        <Button Command="{Binding GoToSettings}"
+                                        IsEnabled="True"
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        FontWeight="Solid"
+                                        Classes="Icon"></Button>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Center">
-                        <Label VerticalAlignment="Center"
-                               HorizontalAlignment="Center">Patch</Label>
-                        <ComboBox x:Name="patchBox"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center"
-                                  SelectedIndex="0"
-                                  ItemsSource="{Binding Patches}"
-                                  SelectedValue="{Binding Patch}">
-                        </ComboBox>
                         
-                        <Label VerticalAlignment="Center"
-                               HorizontalAlignment="Center">Scale</Label>
-                        <ComboBox x:Name="scaleBox"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center"
-                                  SelectedIndex="0"
-                                  ItemsSource="{Binding Scales}"
-                                  SelectedValue="{Binding Scale}">
-                        </ComboBox>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                <Label VerticalAlignment="Center">Patch</Label>
+                                <ComboBox x:Name="patchBox"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding Patches}"
+                                          SelectedValue="{Binding Patch}">
+                                </ComboBox>
+                        </StackPanel>
+                        
+                        
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                <Label VerticalAlignment="Center">Scale</Label>
+                                <ComboBox x:Name="scaleBox"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding Scales}"
+                                          SelectedValue="{Binding Scale}">
+                                </ComboBox>
+                        </StackPanel>
                         
                         <Grid VerticalAlignment="Center"
                               HorizontalAlignment="Center"

@@ -27,23 +27,83 @@
     <Application.Styles>
         <FluentTheme/>
         
-        <Style Selector="Button, Label, TabStripItem, TextBox, ComboBox">
+        <Style Selector="Button, Label, TabStripItem, TabItem, TextBox, ComboBox">
             <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+        </Style>
+        
+        <Style Selector="TabItem">
+            <Setter Property="Foreground" Value="White"/>
+            
+            <Style Selector="^:pointerover /template/ ContentPresenter">
+                <Setter Property="Foreground" Value="White"></Setter>
+            </Style>
+        </Style>
+        
+        <Style Selector="TabStripItem">
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="#414868"/>
+                
+                <Style Selector="^ /template/ Border#PART_SelectedPipe">
+                    <Setter Property="IsVisible" Value="false"/>
+                </Style>
+            </Style>
+            
+        </Style>
+
+
+        
+        <Style Selector="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        
+        <Style Selector="Label">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        
+        <Style Selector="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        
+        <Style Selector="TextBox, ComboBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
         </Style>
         
         <Style Selector="Button.Icon">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        
+        <Style Selector="Button.Cancel">
+            <Setter Property="Background" Value="#a80724"/>
+        </Style>
+        
+        <Style Selector="Button.Confirm">
+            <Setter Property="Background" Value="#4f8a11"/>
         </Style>
         
         <Style Selector="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
         </Style>
         
-        
         <Style Selector=":is(TopLevel), Window">
             <Setter Property="Background" Value="#1a1b26"/>
         </Style>
+        <Style Selector="ComboBox:dropdownopen /template/ Border#PopupBorder">
+            <Setter Property="Background" Value="#1a1b26"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style> 
+        
+        <Style Selector="ComboBoxItem:selected /template/ ContentPresenter"> 
+            <Setter Property="Background" Value="#414868" /> 
+        </Style> 
     </Application.Styles>
              
 </Application>

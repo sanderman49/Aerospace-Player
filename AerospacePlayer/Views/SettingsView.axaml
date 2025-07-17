@@ -9,8 +9,9 @@
     <StackPanel>
         <Button Command="{Binding GoBack}"
                 HorizontalAlignment="Left"
-                FontSize="32"
-                Background="Transparent">&lt;-</Button>
+                FontFamily="{StaticResource FontAwesome}"
+                FontWeight="Solid"
+                Classes="Icon"></Button>
         <Button Click="FileWizard">Import AeroPads</Button>
     </StackPanel>
 
