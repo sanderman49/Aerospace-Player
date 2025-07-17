@@ -34,7 +34,15 @@ public class ShellViewModel : ViewModelBase, IScreen
         programsViewModel = new ProgramsViewModel(this, _player);
         mainViewModel = new MainViewModel(this, _player);
         
-        GoToPrograms = ReactiveCommand.Create(() => Router.Navigate.Execute(programsViewModel).Subscribe());
-        GoToMain = ReactiveCommand.Create(() => Router.Navigate.Execute(mainViewModel).Subscribe());
+        GoToPrograms = ReactiveCommand.Create(() =>
+        {
+            if (Router.GetCurrentViewModel() != programsViewModel)
+             Router.Navigate.Execute(programsViewModel).Subscribe();
+        });
+        GoToMain = ReactiveCommand.Create(() =>
+        {
+            if (Router.GetCurrentViewModel() != mainViewModel)
+                Router.Navigate.Execute(mainViewModel).Subscribe();
+        });
     }
 }
