@@ -34,6 +34,9 @@
                         <Setter Property="Margin" Value="15,8,15,8"/>
                         <Setter Property="CornerRadius" Value="8"/>
                     </Style>
+                    <Style Selector="ListBoxItem:selected ContentPresenter">
+                        <Setter Property="Background" Value="#414868"/>
+                    </Style>
                 </ListBox.Styles>
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramList}">
@@ -54,14 +57,17 @@
                                 <TextBlock Text="{Binding Patch}"
                                            VerticalAlignment="Center"></TextBlock>
                                 <StackPanel VerticalAlignment="Center"
-                                            Margin="15,0,0,0">
+                                            Margin="15,0,15,0">
                                     <TextBlock FontSize="42" 
                                                Text="{Binding Key}"
                                                HorizontalAlignment="Center"></TextBlock>
                                     <TextBlock Text="{Binding Scale}"
                                                HorizontalAlignment="Center"></TextBlock>
                                 </StackPanel>
-                                <Button Command="{CompiledBinding #ProgramList.((vm:ProgramsViewModel)DataContext).GoToEditProgram}" CommandParameter="{Binding}">Edit</Button>
+                                <Button Command="{CompiledBinding #ProgramList.((vm:ProgramsViewModel)DataContext).GoToEditProgram}"
+                                        CommandParameter="{Binding}"
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Classes="Icon"></Button>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

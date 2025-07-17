@@ -34,11 +34,11 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     private readonly float _inactiveOpacity = 1f;
     private readonly Aeropad _aeropad;
 
-    private AvaloniaList<float> _opacities;
-    public AvaloniaList<float> Opacities
+    private AvaloniaList<bool> _isActiveKeys;
+    public AvaloniaList<bool> IsActiveKeys
     {
-        get => _opacities;
-        set { this.RaiseAndSetIfChanged(ref _opacities, value); }
+        get => _isActiveKeys;
+        set { this.RaiseAndSetIfChanged(ref _isActiveKeys, value); }
     }
     
     private readonly Playback _player;
@@ -53,10 +53,11 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     {
         HostScreen = screen;
         
-        Opacities = new AvaloniaList<float>();
+        IsActiveKeys = new AvaloniaList<bool>();
+        
         for (int i = 0; i < 12; i++)
         {
-            Opacities.Add(_inactiveOpacity);
+            IsActiveKeys.Add(false);
         }
         
         _player = player;
@@ -76,9 +77,9 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
     private void PlayPad(string key)
     {
-        for (int i = 0; i < Opacities.Count; i++)
+        for (int i = 0; i < IsActiveKeys.Count; i++)
         {
-            Opacities[i] = 1f;
+            IsActiveKeys[i] = false;
         }
 
         Program selectedProgram = new Program(Patch ?? Patches[0], Scale ?? Scales[0], key);
@@ -90,7 +91,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         else
         {
             _player.CurrentProgram = selectedProgram;
-            Opacities[OpacityKeyToIndex(key)] = _activeOpacity;
+            IsActiveKeys[OpacityKeyToIndex(key)] = true;
         }
     }
 
@@ -98,9 +99,9 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     {
         if (_player.CurrentProgram?.Name != null)
         {
-            for (int i = 0; i < Opacities.Count; i++)
+            for (int i = 0; i < IsActiveKeys.Count; i++)
             {
-                Opacities[i] = 1f;
+                IsActiveKeys[i] = false;
             }
         }
     }

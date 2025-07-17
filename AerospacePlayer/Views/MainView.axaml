@@ -25,6 +25,9 @@
                         <Setter Property="FontWeight" Value="Bold"/>
                         <Setter Property="Command" Value="{Binding Play}"/>
                 </Style>
+                <Style Selector="Button.Active">
+                        <Setter Property="Background" Value="#414868"/>
+                </Style>
         </UserControl.Styles>
         <DockPanel VerticalAlignment="Stretch">
                 <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Right">
@@ -58,75 +61,75 @@
                               RowDefinitions="*,*,*,*">
                                 <Button Grid.Column="0"
                                         Grid.Row="0"
-                                        Opacity="{Binding Opacities[0]}"
                                         CommandParameter="C"
+                                        Classes.Active="{Binding IsActiveKeys[0]}"
                                         Classes="Key"
                                         x:Name="CButton">C</Button>
                                 <Button Grid.Column="1"
                                         Grid.Row="0"
-                                        Opacity="{Binding Opacities[1]}"
-                                        CommandParameter="C#"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[1]}"
+                                        CommandParameter="C#"
                                         x:Name="CSButton">C#</Button>
                                 <Button Grid.Column="2"
                                         Grid.Row="0"
-                                        Opacity="{Binding Opacities[2]}"
-                                        CommandParameter="D"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[2]}"
+                                        CommandParameter="D"
                                         x:Name="DButton">D</Button>
                                 <Button Grid.Column="0"
                                         Grid.Row="1"
-                                        Opacity="{Binding Opacities[3]}"
-                                        CommandParameter="D#"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[3]}"
+                                        CommandParameter="D#"
                                         x:Name="DSButton">D#</Button>
                                 <Button Grid.Column="1"
                                         Grid.Row="1"
-                                        Opacity="{Binding Opacities[4]}"
-                                        CommandParameter="E"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[4]}"
+                                        CommandParameter="E"
                                         x:Name="EButton">E</Button>
                                 <Button Grid.Column="2"
                                         Grid.Row="1"
-                                        Opacity="{Binding Opacities[5]}"
-                                        CommandParameter="F"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[5]}"
+                                        CommandParameter="F"
                                         x:Name="FButton">F</Button>
                                 <Button Grid.Column="0"
                                         Grid.Row="2"
-                                        Opacity="{Binding Opacities[6]}"
-                                        CommandParameter="F#"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[6]}"
+                                        CommandParameter="F#"
                                         x:Name="FSButton">F#</Button>
                                 <Button Grid.Column="1"
                                         Grid.Row="2"
-                                        Opacity="{Binding Opacities[7]}"
-                                        CommandParameter="G"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[7]}"
+                                        CommandParameter="G"
                                         x:Name="GButton">G</Button>
                                 <Button Grid.Column="2"
                                         Grid.Row="2"
-                                        Opacity="{Binding Opacities[8]}"
-                                        CommandParameter="G#"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[8]}"
+                                        CommandParameter="G#"
                                         x:Name="GSButton">G#</Button>
                                 <Button Grid.Column="0"
                                         Grid.Row="3"
-                                        Opacity="{Binding Opacities[9]}"
-                                        CommandParameter="A"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[9]}"
+                                        CommandParameter="A"
                                         x:Name="AButton">A</Button>
                                 <Button Grid.Column="1"
                                         Grid.Row="3"
-                                        Opacity="{Binding Opacities[10]}"
-                                        CommandParameter="A#"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[10]}"
+                                        CommandParameter="A#"
                                         x:Name="ASButton">A#</Button>
                                 <Button Grid.Column="2"
                                         Grid.Row="3"
-                                        Opacity="{Binding Opacities[11]}"
-                                        CommandParameter="B"
                                         Classes="Key"
+                                        Classes.Active="{Binding IsActiveKeys[11]}"
+                                        CommandParameter="B"
                                         x:Name="BButton">B</Button>
                         </Grid>
                 </StackPanel>
