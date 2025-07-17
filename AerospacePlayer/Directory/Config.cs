@@ -29,6 +29,11 @@ public class Config
         {
             return Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".config", "aerospace-player");
         }
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            return Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Library",
+                "Application Support", "aerospace-player");
+        }
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             return Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "Local", "aerospace-player");
