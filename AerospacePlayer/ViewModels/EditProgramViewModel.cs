@@ -27,6 +27,9 @@ public partial class EditProgramViewModel : ViewModelBase, IRoutableViewModel
     
     private readonly Aeropad _aeropad;
     
+    private string? _errorText;
+    public string? ErrorText { get => _errorText; set => this.RaiseAndSetIfChanged(ref _errorText, value); }
+    
     public string[] Patches { get; set; }
     public string[] Scales { get; set; }
     public string[] Keys { get; set; }
@@ -55,6 +58,14 @@ public partial class EditProgramViewModel : ViewModelBase, IRoutableViewModel
         
         Save = ReactiveCommand.Create(() =>
         {
+            if (String.IsNullOrEmpty(Name))
+            {
+                ErrorText = "Programs must have a name.";
+                return;
+            }
+
+            ErrorText = null;
+            
             _program.Name = Name;
             _program.Patch = Patch ?? _program.Patch;
             _program.Scale = Scale ?? _program.Scale;

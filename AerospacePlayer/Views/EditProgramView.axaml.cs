@@ -21,4 +21,14 @@ public partial class EditProgramView : ReactiveUserControl<EditProgramViewModel>
     {
         InitializeComponent();
     }
+    
+    private void ErrorTextUpdated(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        TextBlock textBlock = sender as TextBlock;
+
+        if (String.IsNullOrEmpty(textBlock.Text))
+            textBlock.IsVisible = false;
+        else
+            textBlock.IsVisible = true;
+    }
 }

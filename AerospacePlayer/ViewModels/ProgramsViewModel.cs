@@ -26,6 +26,9 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     public ICommand OpenDeletePopup { get; }
     public ICommand GoToEditProgram { get; }
 
+    private string? _errorText;
+    public string? ErrorText { get => _errorText; set => this.RaiseAndSetIfChanged(ref _errorText, value); }
+
     
     private Program? _selectedProgram;
     public Program? SelectedProgram { get => _selectedProgram; set => this.RaiseAndSetIfChanged(ref _selectedProgram, value); }
@@ -77,7 +80,7 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
 
     private void PlayProgram()
     {
-        if (SelectedProgram?.Signature == _player.CurrentProgram?.Signature)
+        if (SelectedProgram?.Id == _player.CurrentProgram?.Id)
         {
             _player.CurrentProgram = null;
             SelectedProgram = null;
@@ -90,7 +93,7 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
     
     public void OnViewLoad()
     {
-        if (_player.CurrentProgram?.Signature != SelectedProgram?.Signature)
+        if (_player.CurrentProgram?.Id != SelectedProgram?.Id)
         {
             SelectedProgram = null;
         }
@@ -98,10 +101,14 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
 
     public void SaveProgram()
     {
-        if (Name == null)
+
+        if (String.IsNullOrEmpty(Name))
         {
+            ErrorText = "Programs must have a name.";
             return;
         }
+
+        ErrorText = null;
         
         // null means the Combobox hasn't been touched by the user.
         Programs.Add(new Program(Patch ?? Patches[0], Scale ?? Scales[0], Key ?? Keys[0], Name));

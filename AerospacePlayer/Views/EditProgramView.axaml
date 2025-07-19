@@ -58,6 +58,13 @@
         </DockPanel>
         
         <DockPanel Width="300">
+            <TextBlock Text="{Binding ErrorText}"
+                       PropertyChanged="ErrorTextUpdated"
+                       IsVisible="False"
+                       Foreground="{StaticResource RedForeground}"/>
+        </DockPanel>
+        
+        <DockPanel Width="300">
             <StackPanel VerticalAlignment="Bottom"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal">

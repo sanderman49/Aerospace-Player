@@ -145,6 +145,13 @@
                     </ComboBox>
                 </DockPanel>
                 
+                <DockPanel Width="300">
+                    <TextBlock Text="{Binding ErrorText}"
+                               PropertyChanged="ErrorTextUpdated"
+                               IsVisible="False"
+                               Foreground="{StaticResource RedForeground}"/>
+                </DockPanel>
+                
                 <Button Command="{Binding Save}"
                         HorizontalAlignment="Right"
                         Classes="Confirm">Save</Button>

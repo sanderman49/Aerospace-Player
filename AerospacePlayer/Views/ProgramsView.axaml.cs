@@ -27,4 +27,13 @@ public partial class ProgramsView : ReactiveUserControl<ProgramsViewModel>
         _viewModel.OnViewLoad();
     }
 
+    private void ErrorTextUpdated(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        TextBlock textBlock = sender as TextBlock;
+
+        if (String.IsNullOrEmpty(textBlock.Text))
+            textBlock.IsVisible = false;
+        else
+            textBlock.IsVisible = true;
+    }
 }
