@@ -29,10 +29,10 @@ public class ShellViewModel : ViewModelBase, IScreen
         Router = new RoutingState();
         _player = new Playback();
 
-        Router.Navigate.Execute(new MainViewModel(this, _player)).Subscribe();
-        
         programsViewModel = new ProgramsViewModel(this, _player);
         mainViewModel = new MainViewModel(this, _player);
+        
+        Router.Navigate.Execute(mainViewModel).Subscribe();
         
         GoToPrograms = ReactiveCommand.Create(() =>
         {
