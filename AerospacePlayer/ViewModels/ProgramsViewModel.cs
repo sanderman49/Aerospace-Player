@@ -105,6 +105,8 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
         
         // null means the Combobox hasn't been touched by the user.
         Programs.Add(new Program(Patch ?? Patches[0], Scale ?? Scales[0], Key ?? Keys[0], Name));
+
+        ShowPopup = false;
         
         Config.SavePrograms(Programs);
     }

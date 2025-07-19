@@ -22,6 +22,11 @@
         <FontFamily x:Key="OpenSans">avares://AerospacePlayer/Assets/Fonts/OpenSans#Open Sans</FontFamily>
         <FontFamily x:Key="FontAwesome">avares://AerospacePlayer/Assets/Fonts/FontAwesome#Font Awesome 6 Free</FontFamily>
         <FontFamily x:Key="FontAwesomeBrands">avares://AerospacePlayer/Assets/Fonts/FontAwesome#Font Awesome 6 Brands</FontFamily>
+        
+        <Color x:Key="BackgroundColor">#1a1b26</Color>
+        <Color x:Key="ActiveBackgroundColor">#414868</Color>
+        <Color x:Key="Red">#a80724</Color>
+        <Color x:Key="Green">#4f8a11</Color>
     </Application.Resources>
     
     <Application.Styles>
@@ -41,7 +46,7 @@
         
         <Style Selector="TabStripItem">
             <Style Selector="^:selected">
-                <Setter Property="Background" Value="#414868"/>
+                <Setter Property="Background" Value="{StaticResource ActiveBackgroundColor}"/>
                 
                 <Style Selector="^ /template/ Border#PART_SelectedPipe">
                     <Setter Property="IsVisible" Value="false"/>
@@ -58,6 +63,20 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Margin" Value="5"/>
+            
+            <Style Selector="^.Icon">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="FontSize" Value="28"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+        
+            <Style Selector="^.Cancel">
+                <Setter Property="Background" Value="{StaticResource Red}"/>
+            </Style>
+        
+            <Style Selector="^.Confirm">
+                <Setter Property="Background" Value="{StaticResource Green}"/>
+            </Style>
         </Style>
         
         <Style Selector="Label">
@@ -74,35 +93,22 @@
             <Setter Property="FontSize" Value="16"/>
         </Style>
         
-        <Style Selector="Button.Icon">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="FontSize" Value="28"/>
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-        
-        <Style Selector="Button.Cancel">
-            <Setter Property="Background" Value="#a80724"/>
-        </Style>
-        
-        <Style Selector="Button.Confirm">
-            <Setter Property="Background" Value="#4f8a11"/>
-        </Style>
         
         <Style Selector="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
         </Style>
         
         <Style Selector=":is(TopLevel), Window">
-            <Setter Property="Background" Value="#1a1b26"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
         </Style>
         <Style Selector="ComboBox:dropdownopen /template/ Border#PopupBorder">
-            <Setter Property="Background" Value="#1a1b26"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
             <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style> 
         
         <Style Selector="ComboBoxItem:selected /template/ ContentPresenter"> 
-            <Setter Property="Background" Value="#414868" /> 
+            <Setter Property="Background" Value="{StaticResource ActiveBackgroundColor}" /> 
         </Style> 
     </Application.Styles>
              

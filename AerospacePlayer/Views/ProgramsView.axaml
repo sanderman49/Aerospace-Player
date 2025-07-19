@@ -38,7 +38,7 @@
                         <Setter Property="CornerRadius" Value="8"/>
                     </Style>
                     <Style Selector="ListBoxItem:selected ContentPresenter">
-                        <Setter Property="Background" Value="#414868"/>
+                        <Setter Property="Background" Value="{StaticResource ActiveBackgroundColor}"/>
                     </Style>
                 </ListBox.Styles>
                 <i:Interaction.Behaviors>
@@ -92,6 +92,8 @@
             Height="300"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Bottom"
+            Background="{StaticResource BackgroundColor}"
+            x:Name="AddProgramPopup"
             IsVisible="{Binding ShowPopup}">
             <Border.Styles>
                 <Style Selector="Label">
@@ -109,7 +111,8 @@
                 
                 <DockPanel Width="300">
                     <Label>Name </Label>
-                    <TextBox x:Name="Name" Text="{Binding Name}"></TextBox>
+                    <TextBox x:Name="Name"
+                             Text="{Binding Name}"></TextBox>
                 </DockPanel>
                 
                 <DockPanel Width="300">

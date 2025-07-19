@@ -26,7 +26,7 @@
                         <Setter Property="Command" Value="{Binding Play}"/>
                 </Style>
                 <Style Selector="Button.Active">
-                        <Setter Property="Background" Value="#414868"/>
+                        <Setter Property="Background" Value="{StaticResource ActiveBackgroundColor}"/>
                 </Style>
         </UserControl.Styles>
         
