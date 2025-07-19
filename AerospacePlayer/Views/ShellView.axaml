@@ -25,7 +25,7 @@
                             </Setter>
                         </Style>
                     </TabStrip.Styles>                    
-                    <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="MainTab" Header="Main"></TabItem>
+                    <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="MainTab" Header="Live"></TabItem>
                     <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="ProgramsTab" Header="Programs"></TabItem>
                     
                     <i:Interaction.Behaviors>
