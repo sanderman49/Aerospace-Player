@@ -8,6 +8,17 @@ public class Program : ObservableObject
     public string Signature { get => $"{Name}{Patch}{Scale}{Key}"; }
     public string Id { get; }
     
+    public bool IsUserDefined
+    {
+        get
+        {
+            if (String.IsNullOrEmpty(Name))
+                return false;
+            else
+                return true;
+        }
+    }
+
     public string? Name { get; set; }
     
     public string Patch { get; set; } = null!;

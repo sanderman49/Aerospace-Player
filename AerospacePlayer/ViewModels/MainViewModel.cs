@@ -95,7 +95,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
     public void OnViewLoad()
     {
-        if (_player.CurrentProgram?.Name != null)
+        if (_player.CurrentProgram?.IsUserDefined ?? true)
         {
             for (int i = 0; i < IsActiveKeys.Count; i++)
             {

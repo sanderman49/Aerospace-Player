@@ -80,15 +80,8 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
 
     private void PlayProgram()
     {
-        if (SelectedProgram?.Id == _player.CurrentProgram?.Id)
-        {
-            _player.CurrentProgram = null;
-            SelectedProgram = null;
-        }
-        else
-        {
+        if (!(SelectedProgram == null && !_player.CurrentProgram.IsUserDefined)) // Don't clear the program from the Live screen
             _player.CurrentProgram = SelectedProgram;
-        }
     }
     
     public void OnViewLoad()
