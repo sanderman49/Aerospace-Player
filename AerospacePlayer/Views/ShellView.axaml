@@ -18,15 +18,6 @@
                     Grid.Row="1">
                 <TabStrip SelectionChanged="OnTabChanged"
                           HorizontalAlignment="Stretch">
-                    <TabStrip.Styles>
-                        <Style Selector="TabStrip">
-                            <Setter Property="ItemsPanel">
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Columns="{Binding $parent[TabStrip].Items.Count}"/>
-                                </ItemsPanelTemplate>
-                            </Setter>
-                        </Style>
-                    </TabStrip.Styles>                    
                     <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="MainTab" Header="Live"></TabItem>
                     <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="ProgramsTab" Header="Programs"></TabItem>
                 </TabStrip>

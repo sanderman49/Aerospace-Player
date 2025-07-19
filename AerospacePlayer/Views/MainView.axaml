@@ -57,20 +57,29 @@
                                 </ComboBox>
                         </StackPanel>
                         
+                        <StackPanel Width="{Binding #KeysGrid.Width}">
+                                <Label HorizontalAlignment="Center">Scale</Label>
+                                <TabStrip ItemsSource="{Binding Scales}"
+                                          SelectedValue="{Binding Scale}"
+                                          HorizontalAlignment="Stretch">
+                                </TabStrip>
+                        </StackPanel>
                         
+                        <!--
                         <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center">
-                                <Label VerticalAlignment="Center">Scale</Label>
                                 <ComboBox x:Name="scaleBox"
                                           SelectedIndex="0"
                                           ItemsSource="{Binding Scales}"
                                           SelectedValue="{Binding Scale}">
                                 </ComboBox>
                         </StackPanel>
+                        -->
                         
                         <Grid VerticalAlignment="Center"
                               HorizontalAlignment="Center"
+                              x:Name="KeysGrid"
                               ColumnDefinitions="1*,1*,1*"
                               RowDefinitions="*,*,*,*">
                                 <Button Grid.Column="0"

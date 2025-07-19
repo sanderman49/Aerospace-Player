@@ -43,7 +43,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     
     public string[] Patches { get; set; }
     public string[] Scales { get; set; }
-
+    
     public string? Patch { get; set; }
     public string? Scale { get; set; }
 
@@ -57,6 +57,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         {
             IsActiveKeys.Add(false);
         }
+        
         
         _player = player;
         _aeropad = new Aeropad();

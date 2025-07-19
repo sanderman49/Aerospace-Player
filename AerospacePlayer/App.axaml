@@ -40,10 +40,12 @@
         
         <Style Selector="TabItem">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
             
-            <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Style Selector="^:pointerover /template/ ContentPresenter, ^:pressed /template/ ContentPresenter">
                 <Setter Property="Foreground" Value="White"></Setter>
             </Style>
+            
         </Style>
         
         <Style Selector="TabStripItem">
@@ -53,12 +55,30 @@
                 <Style Selector="^ /template/ Border#PART_SelectedPipe">
                     <Setter Property="IsVisible" Value="false"/>
                 </Style>
+                
+                <Style Selector="^:pointerover /template/ Border, ^:pressed /template/ Border">
+                    <Setter Property="Background" Value="{StaticResource ActiveBackgroundColor}"/>
+                </Style>
+                
             </Style>
             
+            <Setter Property="Foreground" Value="White"/>
+            
+            <Style Selector="^:pointerover /template/ ContentPresenter, ^:pressed /template/ ContentPresenter">
+                <Setter Property="Foreground" Value="White"></Setter>
+            </Style>
+            
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    
+        <Style Selector="TabStrip">
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding $parent[TabStrip].Items.Count}"/>
+                </ItemsPanelTemplate>
+            </Setter>
         </Style>
 
-
-        
         <Style Selector="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="White"/>
