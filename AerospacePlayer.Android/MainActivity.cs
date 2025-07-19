@@ -15,6 +15,7 @@ namespace AerospacePlayer.Android;
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     MainLauncher = true,
+    WindowSoftInputMode = SoftInput.AdjustResize,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 public class MainActivity : AvaloniaMainActivity<App>
 {
@@ -23,14 +24,15 @@ public class MainActivity : AvaloniaMainActivity<App>
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
+        
     }
 
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
         
-        Window?.SetBackgroundDrawable(new ColorDrawable(Color.ParseColor("#1a126b")));
-        Window?.SetStatusBarColor(Color.ParseColor("#1a126b"));
-        Window?.SetNavigationBarColor(Color.ParseColor("#1a126b"));
+        Window?.SetBackgroundDrawable(new ColorDrawable(Color.ParseColor("#1a1b26")));
+        Window?.SetStatusBarColor(Color.ParseColor("#1a1b26"));
+        Window?.SetNavigationBarColor(Color.ParseColor("#1a1b26"));
     }
 }
