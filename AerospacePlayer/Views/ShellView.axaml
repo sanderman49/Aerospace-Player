@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:AerospacePlayer.ViewModels"
+             DataContextChanged="OnDataContextChanged"
              xmlns:rxui="using:Avalonia.ReactiveUI"
              x:Class="AerospacePlayer.Views.ShellView"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
@@ -15,7 +16,8 @@
                     VerticalAlignment="Bottom"
                     IsVisible="{Binding Router.CurrentViewModel}"
                     Grid.Row="1">
-                <TabStrip HorizontalAlignment="Stretch">
+                <TabStrip SelectionChanged="OnTabChanged"
+                          HorizontalAlignment="Stretch">
                     <TabStrip.Styles>
                         <Style Selector="TabStrip">
                             <Setter Property="ItemsPanel">
@@ -27,16 +29,6 @@
                     </TabStrip.Styles>                    
                     <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="MainTab" Header="Live"></TabItem>
                     <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="ProgramsTab" Header="Programs"></TabItem>
-                    
-                    <i:Interaction.Behaviors>
-                        <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #MainTab}">
-                            <ia:InvokeCommandAction Command="{Binding GoToMain}"/>
-                        </ia:EventTriggerBehavior>
-                        
-                        <ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #ProgramsTab}">
-                            <ia:InvokeCommandAction Command="{Binding GoToPrograms}"/>
-                        </ia:EventTriggerBehavior>
-                    </i:Interaction.Behaviors>
                 </TabStrip>
         </StackPanel>
     </Grid>

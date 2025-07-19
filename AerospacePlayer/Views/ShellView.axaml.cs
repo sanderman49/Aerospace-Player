@@ -2,6 +2,7 @@ using System;
 using AerospacePlayer.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -13,9 +14,36 @@ namespace AerospacePlayer.Views;
 
 public partial class ShellView : ReactiveUserControl<ShellViewModel>
 {
+    private ShellViewModel _viewModel;
     public ShellView()
     {
+        
         InitializeComponent();
     }
-    
+
+    private void OnTabChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        TabStrip tabStrip = sender as TabStrip;
+
+        TabItem tabItem = tabStrip.SelectedValue as TabItem;
+        
+        if (_viewModel == null)
+        {
+            return;
+        }
+
+        if (tabItem.Name == "MainTab")
+        {
+            _viewModel.NavigateToViewModel(nameof(MainViewModel));
+        }
+        else if (tabItem.Name == "ProgramsTab")
+        {
+            _viewModel.NavigateToViewModel(nameof(ProgramsViewModel));
+        }
+    }
+
+    private void OnDataContextChanged(object sender, EventArgs e)
+    {
+        _viewModel = (ShellViewModel)DataContext;
+    }
 }

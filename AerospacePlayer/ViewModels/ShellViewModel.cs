@@ -4,6 +4,7 @@ using System.Windows.Input;
 using AerospacePlayer.Audio;
 using AerospacePlayer.Directory;
 using AerospacePlayer.Models;
+using AerospacePlayer.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
@@ -13,9 +14,6 @@ namespace AerospacePlayer.ViewModels;
 public class ShellViewModel : ViewModelBase, IScreen
 {
     public RoutingState Router { get; }
-    
-    public ICommand GoToPrograms { get; set; }
-    public ICommand GoToMain { get; set; }
     
     private ProgramsViewModel programsViewModel;
     private MainViewModel mainViewModel;
@@ -33,16 +31,18 @@ public class ShellViewModel : ViewModelBase, IScreen
         mainViewModel = new MainViewModel(this, _player);
         
         Router.Navigate.Execute(mainViewModel).Subscribe();
+    }
+
+    public void NavigateToViewModel(string viewModel)
+    {
+        if (viewModel == nameof(MainViewModel))
+        {
+            Router.Navigate.Execute(mainViewModel).Subscribe();
+        }
         
-        GoToPrograms = ReactiveCommand.Create(() =>
+        if (viewModel == nameof(ProgramsViewModel))
         {
-            if (Router.GetCurrentViewModel() != programsViewModel)
-             Router.Navigate.Execute(programsViewModel).Subscribe();
-        });
-        GoToMain = ReactiveCommand.Create(() =>
-        {
-            if (Router.GetCurrentViewModel() != mainViewModel)
-                Router.Navigate.Execute(mainViewModel).Subscribe();
-        });
+            Router.Navigate.Execute(programsViewModel).Subscribe();
+        }
     }
 }
