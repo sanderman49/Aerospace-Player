@@ -25,8 +25,10 @@
         
         <Color x:Key="BackgroundColor">#1a1b26</Color>
         <Color x:Key="ActiveBackgroundColor">#414868</Color>
-        <Color x:Key="Red">#a80724</Color>
-        <Color x:Key="Green">#4f8a11</Color>
+        <Color x:Key="RedBackground">#a80724</Color>
+        <Color x:Key="RedForeground">#f7768e</Color>
+        <Color x:Key="GreenBackground">#4f8a11</Color>
+        <Color x:Key="GreenForeground">#9ece6a</Color>
     </Application.Resources>
     
     <Application.Styles>
@@ -71,11 +73,11 @@
             </Style>
         
             <Style Selector="^.Cancel">
-                <Setter Property="Background" Value="{StaticResource Red}"/>
+                <Setter Property="Background" Value="{StaticResource RedBackground}"/>
             </Style>
         
             <Style Selector="^.Confirm">
-                <Setter Property="Background" Value="{StaticResource Green}"/>
+                <Setter Property="Background" Value="{StaticResource GreenBackground}"/>
             </Style>
         </Style>
         
