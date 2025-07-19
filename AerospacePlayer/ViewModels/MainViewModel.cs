@@ -30,8 +30,6 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     public ICommand Play { get; }
 
 
-    private readonly float _activeOpacity = 1.2f;
-    private readonly float _inactiveOpacity = 1f;
     private readonly Aeropad _aeropad;
 
     private AvaloniaList<bool> _isActiveKeys;
