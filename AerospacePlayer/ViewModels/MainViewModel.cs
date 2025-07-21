@@ -27,6 +27,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     public string? UrlPathSegment { get; } = Guid.NewGuid().ToString().Substring(0, 5);
 
     public ICommand GoToSettings { get; }
+    public ICommand GoToPatchSelect { get; }
     public ICommand Play { get; }
 
 
@@ -43,9 +44,12 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     
     public string[] Patches { get; set; }
     public string[] Scales { get; set; }
-    
-    public string? Patch { get; set; }
-    public string? Scale { get; set; }
+
+    private string? _patch;
+    public string? Patch { get => _patch; set => _patch = value; }
+
+    private string? _scale;
+    public string? Scale { get => _scale; set => _scale = value; }
 
     public MainViewModel(IScreen screen, Playback player)
     {
@@ -65,11 +69,10 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         Patches = _aeropad.Patches;
         Scales = _aeropad.Scales;
 
-        GoToSettings = new RelayCommand(() =>
-            {
-                HostScreen.Router.Navigate.Execute(new SettingsViewModel(HostScreen));
-            }
-        );
+        Patch = _aeropad.Patches[0];
+
+        GoToSettings = new RelayCommand(() => HostScreen.Router.Navigate.Execute(new SettingsViewModel(HostScreen)));
+        GoToPatchSelect = new RelayCommand(() => HostScreen.Router.Navigate.Execute(new PatchSelectViewModel(HostScreen, this)));
         
         Play = ReactiveCommand.Create<string>(PlayPad);
     }

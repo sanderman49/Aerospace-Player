@@ -44,21 +44,9 @@
                 <StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                         
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                <Label VerticalAlignment="Center">Patch</Label>
-                                <ComboBox x:Name="patchBox"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          SelectedIndex="0"
-                                          ItemsSource="{Binding Patches}"
-                                          SelectedValue="{Binding Patch}">
-                                </ComboBox>
-                        </StackPanel>
                         
                         <StackPanel Width="{Binding #KeysGrid.Width}">
-                                <Label HorizontalAlignment="Center">Scale</Label>
+                                <Label HorizontalAlignment="Center" FontSize="24" FontWeight="Bold">Scale</Label>
                                 <TabStrip ItemsSource="{Binding Scales}"
                                           SelectedValue="{Binding Scale}"
                                           HorizontalAlignment="Stretch">
@@ -155,6 +143,24 @@
                                         CommandParameter="B"
                                         x:Name="BButton">B</Button>
                         </Grid>
+                        
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                <Label VerticalAlignment="Center" FontSize="24" FontWeight="Bold">Patch</Label>
+                                
+                                <Button Command="{Binding GoToPatchSelect}">
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Patch}"></TextBlock>
+                                </Button>
+                                
+                                <!--<ComboBox x:Name="patchBox"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding Patches}"
+                                          SelectedValue="{Binding Patch}">
+                                </ComboBox>-->
+                        </StackPanel>
                 </StackPanel>
         </DockPanel>
 </UserControl>
