@@ -168,5 +168,16 @@ public class Playback
         }
     }
 
+    public bool CurrentProgramIsUserDefined()
+    {
+        bool isUserDefined;
+        
+        if (CurrentProgram != null)
+            isUserDefined = CurrentProgram.IsUserDefined;
+        else
+            isUserDefined = false;
+        
+        return isUserDefined;
+    }
     
 }
