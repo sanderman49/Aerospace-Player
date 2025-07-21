@@ -2,9 +2,11 @@ using System;
 using AerospacePlayer.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Platform;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.ReactiveUI;
@@ -45,5 +47,16 @@ public partial class ShellView : ReactiveUserControl<ShellViewModel>
     private void OnDataContextChanged(object sender, EventArgs e)
     {
         _viewModel = (ShellViewModel)DataContext;
+    }
+
+    private void Control_OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
+        {
+            var insetsManager = TopLevel.GetTopLevel(this).InsetsManager;
+            insetsManager.IsSystemBarVisible = true;
+            insetsManager.SystemBarColor = Color.Parse("#1a1b26");
+            
+        }
     }
 }

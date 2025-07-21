@@ -24,15 +24,11 @@ public class MainActivity : AvaloniaMainActivity<App>
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
-        
+
     }
 
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
-        
-        Window?.SetBackgroundDrawable(new ColorDrawable(Color.ParseColor("#1a1b26")));
-        Window?.SetStatusBarColor(Color.ParseColor("#1a1b26"));
-        Window?.SetNavigationBarColor(Color.ParseColor("#1a1b26"));
     }
 }

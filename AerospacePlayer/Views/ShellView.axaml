@@ -6,6 +6,7 @@
              x:Class="AerospacePlayer.Views.ShellView"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             Loaded="Control_OnLoaded"
              x:DataType="vm:ShellViewModel">
     
     <Grid RowDefinitions="*,50">
