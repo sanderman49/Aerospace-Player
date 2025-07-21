@@ -46,10 +46,27 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     public string[] Scales { get; set; }
 
     private string? _patch;
-    public string? Patch { get => _patch; set => _patch = value; }
+    public string? Patch
+    {
+        get => _patch;
+        set
+        {
+            _patch = value;
+            
+            _player.UpdateCurrentProgram(patch: value);
+        }
+    }
 
     private string? _scale;
-    public string? Scale { get => _scale; set => _scale = value; }
+    public string? Scale
+    {
+        get => _scale;
+        set
+        {
+            _scale = value;
+            _player.UpdateCurrentProgram(scale: value);
+        }
+    }
 
     public MainViewModel(IScreen screen, Playback player)
     {
@@ -93,7 +110,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         else
         {
             _player.CurrentProgram = selectedProgram;
-            IsActiveKeys[OpacityKeyToIndex(key)] = true;
+            IsActiveKeys[KeyToIndex(key)] = true;
         }
     }
 
@@ -108,7 +125,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         }
     }
 
-    private int OpacityKeyToIndex(string key)
+    private int KeyToIndex(string key)
     {
         return _aeropad.Keys.IndexOf(key);
     }

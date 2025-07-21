@@ -145,5 +145,28 @@ public class Playback
         return gain;
     }
 
+    public void UpdateCurrentProgram(string? patch = null, string? scale = null, string? key = null)
+    {
+        if (CurrentProgram != null)
+        {
+            Program newProgram = CurrentProgram;
+                
+            if (!String.IsNullOrEmpty(patch))
+            {
+                newProgram.Patch = patch;
+            }
+            if (!String.IsNullOrEmpty(scale))
+            {
+                newProgram.Scale = scale;
+            }
+            if (!String.IsNullOrEmpty(key))
+            {
+                newProgram.Key = key;
+            }
+
+            CurrentProgram = newProgram;
+        }
+    }
+
     
 }
