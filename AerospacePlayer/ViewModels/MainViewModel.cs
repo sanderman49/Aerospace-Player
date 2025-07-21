@@ -52,8 +52,9 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         set
         {
             _patch = value;
-            
-            _player.UpdateCurrentProgram(patch: value);
+
+            if (!_player.CurrentProgramIsUserDefined())
+                _player.UpdateCurrentProgram(patch: value);
         }
     }
 
@@ -64,7 +65,9 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
         set
         {
             _scale = value;
-            _player.UpdateCurrentProgram(scale: value);
+
+            if (!_player.CurrentProgramIsUserDefined())
+                _player.UpdateCurrentProgram(scale: value);
         }
     }
 
@@ -116,7 +119,7 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
     public void OnViewLoad()
     {
-        if (_player.CurrentProgram?.IsUserDefined ?? true)
+        if (_player.CurrentProgramIsUserDefined())
         {
             for (int i = 0; i < IsActiveKeys.Count; i++)
             {
