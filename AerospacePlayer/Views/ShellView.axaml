@@ -17,9 +17,10 @@
                     IsVisible="{Binding Router.CurrentViewModel}"
                     Grid.Row="1">
                 <TabStrip SelectionChanged="OnTabChanged"
+                          Classes="Navigation"
                           HorizontalAlignment="Stretch">
                     <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="MainTab" Header="Live"></TabItem>
-                    <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="ProgramsTab" Header="Programs"></TabItem>
+                    <TabItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="ProgramsTab" Header="Setlist"></TabItem>
                 </TabStrip>
         </StackPanel>
     </Grid>

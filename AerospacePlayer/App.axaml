@@ -46,6 +46,9 @@
                 <Setter Property="Foreground" Value="White"></Setter>
             </Style>
             
+            <Setter Property="CornerRadius" Value="6"/>
+            
+            <Setter Property="FontSize" Value="16"/>
         </Style>
         
         <Style Selector="TabStripItem">
@@ -60,6 +63,10 @@
                     <Setter Property="Background" Value="{StaticResource ActiveBackgroundColor}"/>
                 </Style>
                 
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                
+                
             </Style>
             
             <Setter Property="Foreground" Value="White"/>
@@ -69,6 +76,8 @@
             </Style>
             
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            
+            <Setter Property="CornerRadius" Value="6"/>
         </Style>
     
         <Style Selector="TabStrip">
@@ -77,8 +86,12 @@
                     <UniformGrid Columns="{Binding $parent[TabStrip].Items.Count}"/>
                 </ItemsPanelTemplate>
             </Setter>
+            
+            <Style Selector="^.Navigation > TabItem">
+                    <Setter Property="FontSize" Value="24"/>
+            </Style>
         </Style>
-
+        
         <Style Selector="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="White"/>

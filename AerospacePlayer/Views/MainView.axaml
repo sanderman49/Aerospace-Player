@@ -46,24 +46,15 @@
                         
                         
                         <StackPanel Width="{Binding #KeysGrid.Width}">
-                                <Label HorizontalAlignment="Center" FontSize="24" FontWeight="Bold">Scale</Label>
                                 <TabStrip ItemsSource="{Binding Scales}"
                                           SelectedValue="{Binding Scale}"
+                                          BorderBrush="White"
+                                          BorderThickness="1"
+                                          CornerRadius="6"
+                                          Margin="8"
                                           HorizontalAlignment="Stretch">
                                 </TabStrip>
                         </StackPanel>
-                        
-                        <!--
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                <ComboBox x:Name="scaleBox"
-                                          SelectedIndex="0"
-                                          ItemsSource="{Binding Scales}"
-                                          SelectedValue="{Binding Scale}">
-                                </ComboBox>
-                        </StackPanel>
-                        -->
                         
                         <Grid VerticalAlignment="Center"
                               HorizontalAlignment="Center"
@@ -144,10 +135,10 @@
                                         x:Name="BButton">B</Button>
                         </Grid>
                         
-                        <StackPanel Orientation="Horizontal"
+                        <StackPanel 
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center">
-                                <Label VerticalAlignment="Center" FontSize="24" FontWeight="Bold">Patch</Label>
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold">Patch</Label>
                                 
                                 <Button Command="{Binding GoToPatchSelect}">
                                         <TextBlock HorizontalAlignment="Center" Text="{Binding Patch}"></TextBlock>

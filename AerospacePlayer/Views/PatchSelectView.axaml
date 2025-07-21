@@ -6,21 +6,30 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AerospacePlayer.Views.PatchSelectView"
              x:DataType="vm:PatchSelectViewModel">
-    <StackPanel>
-        <Grid ColumnDefinitions="1*, 1*"
-              RowDefinitions="1*, 1*, 1*, 1*, 1*, 1*">
-            <ItemsRepeater x:Name="ItemsRepeater" 
-                                                        ItemsSource="{Binding Patches}">
-                <ItemsRepeater.ItemTemplate>
+    <UserControl.Styles>
+        <Style Selector="Button.PatchSelect">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Styles>
+    <DockPanel>
+        <ScrollViewer>
+            <ItemsControl x:Name="ItemsControl" 
+                      ItemsSource="{Binding Patches}">
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{CompiledBinding #ItemsRepeater.((vm:PatchSelectViewModel)DataContext).SelectAndReturn}" 
+                        <Button Command="{CompiledBinding #ItemsControl.((vm:PatchSelectViewModel)DataContext).SelectAndReturn}" 
+                                Classes="PatchSelect"
                                 CommandParameter="{Binding}">
                             <TextBlock Text="{Binding}"></TextBlock>
                         </Button>
                     </DataTemplate>
-                </ItemsRepeater.ItemTemplate>
-            </ItemsRepeater>
-        </Grid>
-    </StackPanel>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
 
 </UserControl>
