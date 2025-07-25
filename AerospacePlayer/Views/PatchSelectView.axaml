@@ -16,20 +16,29 @@
         </Style>
     </UserControl.Styles>
     <DockPanel>
-        <ScrollViewer>
-            <ItemsControl x:Name="ItemsControl" 
-                      ItemsSource="{Binding Patches}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Command="{CompiledBinding #ItemsControl.((vm:PatchSelectViewModel)DataContext).SelectAndReturn}" 
-                                Classes="PatchSelect"
-                                CommandParameter="{Binding}">
-                            <TextBlock Text="{Binding}"></TextBlock>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <Button Command="{Binding GoBack}"
+                HorizontalAlignment="Left"
+                FontFamily="{StaticResource FontAwesome}"
+                FontWeight="Solid"
+                DockPanel.Dock="Top"
+                Classes="Icon"></Button>
+        
+        <DockPanel>
+            <ScrollViewer>
+                <ItemsControl x:Name="ItemsControl" 
+                          ItemsSource="{Binding Patches}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{CompiledBinding #ItemsControl.((vm:PatchSelectViewModel)DataContext).SelectAndReturn}" 
+                                    Classes="PatchSelect"
+                                    CommandParameter="{Binding}">
+                                <TextBlock Text="{Binding}"></TextBlock>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
     </DockPanel>
 
 </UserControl>

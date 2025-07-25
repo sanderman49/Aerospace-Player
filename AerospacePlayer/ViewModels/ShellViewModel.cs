@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using AerospacePlayer.Audio;
 using AerospacePlayer.Directory;
@@ -14,7 +15,17 @@ namespace AerospacePlayer.ViewModels;
 public class ShellViewModel : ViewModelBase, IScreen
 {
     public RoutingState Router { get; }
-    
+
+    private bool _tabsVisible;
+    public bool TabsVisible
+    {
+        get => _tabsVisible;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _tabsVisible, value);
+        }
+    }
+
     private ProgramsViewModel programsViewModel;
     private MainViewModel mainViewModel;
     
@@ -23,6 +34,8 @@ public class ShellViewModel : ViewModelBase, IScreen
     public ShellViewModel()
     {
         Config.GenerateConfigPath();
+
+        TabsVisible = true;
         
         Router = new RoutingState();
         _player = new Playback();
@@ -30,19 +43,36 @@ public class ShellViewModel : ViewModelBase, IScreen
         programsViewModel = new ProgramsViewModel(this, _player);
         mainViewModel = new MainViewModel(this, _player);
         
-        Router.Navigate.Execute(mainViewModel).Subscribe();
+        Router.Navigate.Execute(mainViewModel).Subscribe(vm  =>
+        {
+        });
+
+        Router.NavigationChanged.Subscribe(_ =>
+        {
+            int vmNum = Router.NavigationStack.Count;
+            
+            // Hide navigation tabs when not on a main screen.
+            if (vmNum <= 1)
+            {
+                TabsVisible = true;
+            }
+            else
+            {
+                TabsVisible = false;
+            }
+        });
     }
 
     public void NavigateToViewModel(string viewModel)
     {
         if (viewModel == nameof(MainViewModel))
         {
-            Router.Navigate.Execute(mainViewModel).Subscribe();
+            Router.NavigateAndReset.Execute(mainViewModel).Subscribe();
         }
         
         if (viewModel == nameof(ProgramsViewModel))
         {
-            Router.Navigate.Execute(programsViewModel).Subscribe();
+            Router.NavigateAndReset.Execute(programsViewModel).Subscribe();
         }
     }
 }

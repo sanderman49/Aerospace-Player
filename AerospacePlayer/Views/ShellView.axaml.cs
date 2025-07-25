@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using AerospacePlayer.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -19,7 +20,6 @@ public partial class ShellView : ReactiveUserControl<ShellViewModel>
     private ShellViewModel _viewModel;
     public ShellView()
     {
-        
         InitializeComponent();
     }
 
@@ -56,7 +56,7 @@ public partial class ShellView : ReactiveUserControl<ShellViewModel>
             var insetsManager = TopLevel.GetTopLevel(this).InsetsManager;
             insetsManager.IsSystemBarVisible = true;
             insetsManager.SystemBarColor = Color.Parse("#1a1b26");
-            
         }
     }
+
 }

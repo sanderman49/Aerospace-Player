@@ -66,7 +66,7 @@ public partial class ProgramsViewModel : ViewModelBase, IRoutableViewModel
         Play = ReactiveCommand.Create(PlayProgram);
         Save = ReactiveCommand.Create(SaveProgram);
         
-        GoToEditProgram = ReactiveCommand.Create<Program>((program) => HostScreen.Router.Navigate.Execute(new EditProgramViewModel(HostScreen, program, Programs)));
+        GoToEditProgram = ReactiveCommand.Create<Program>((program) => HostScreen.Router.NavigationStack.Add(new EditProgramViewModel(HostScreen, program, Programs)));
         
         OpenAddPopup = ReactiveCommand.Create(() => ShowPopup = true);
         CloseAddPopup = ReactiveCommand.Create(() => ShowPopup = false);

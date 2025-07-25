@@ -96,9 +96,9 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
         _settingsViewModel = new SettingsViewModel(HostScreen, _player);
         
-        GoToSettings = new RelayCommand(() => HostScreen.Router.Navigate.Execute(_settingsViewModel));
+        GoToSettings = new RelayCommand(() => HostScreen.Router.NavigationStack.Add(_settingsViewModel));
         
-        GoToPatchSelect = new RelayCommand(() => HostScreen.Router.Navigate.Execute(new PatchSelectViewModel(HostScreen, this)));
+        GoToPatchSelect = new RelayCommand(() => HostScreen.Router.NavigationStack.Add(new PatchSelectViewModel(HostScreen, this)));
         
         Play = ReactiveCommand.Create<string>(PlayPad);
     }

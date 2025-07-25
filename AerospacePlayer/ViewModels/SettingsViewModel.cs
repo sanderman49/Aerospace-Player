@@ -35,8 +35,9 @@ public partial class SettingsViewModel : ViewModelBase, IRoutableViewModel
             this.RaisePropertyChanged(nameof(FadeTimeFormatted));
         }
     }
+    
+    // Used displaying FadeTime in view.
     public string FadeTimeFormatted { get => $"{_fadeTime}s"; }
-
 
     private float _pan;
     public float Pan
