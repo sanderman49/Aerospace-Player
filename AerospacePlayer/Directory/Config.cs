@@ -60,6 +60,7 @@ public class Config
         File.WriteAllText(programsPath, serializedPrograms);
     }
     
+    
     public static ObservableCollection<Program>? GetPrograms()
     {
         string programsPath = GetProgramsPath();
@@ -79,11 +80,53 @@ public class Config
 
         return programs;
     }
+    
+    public static void SaveSettings(Settings settings)
+    {
+        JsonSerializerOptions options = new()
+        {
+            WriteIndented = true
+        };
+        
+        var serializedSettings = JsonSerializer.Serialize(settings, options);
+
+        string settingsPath = GetSettingsPath();
+        
+        File.WriteAllText(settingsPath, serializedSettings);
+    }
+    
+    public static Settings GetSettings()
+    {
+        string settingsPath = GetSettingsPath();
+
+        string serializedSettings;
+
+        try
+        {
+            serializedSettings = File.ReadAllText(settingsPath);
+        }
+        catch (FileNotFoundException)
+        {
+            return new Settings();
+        }
+
+        var settings = JsonSerializer.Deserialize<Settings>(serializedSettings);
+
+        return settings;
+    }
 
     public static string GetProgramsPath()
     {
         var configPath = GetConfigPath();
         var programsPath = Path.Join(configPath, "programs.json");
+
+        return programsPath;
+    }
+    
+    public static string GetSettingsPath()
+    {
+        var configPath = GetConfigPath();
+        var programsPath = Path.Join(configPath, "settings.json");
 
         return programsPath;
     }

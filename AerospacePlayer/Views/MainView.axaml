@@ -49,7 +49,7 @@
                                 <TabStrip ItemsSource="{Binding Scales}"
                                           SelectedValue="{Binding Scale}"
                                           BorderBrush="White"
-                                          BorderThickness="1"
+                                          BorderThickness="2"
                                           CornerRadius="6"
                                           Margin="8"
                                           HorizontalAlignment="Stretch">

@@ -31,6 +31,9 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
     public ICommand Play { get; }
 
 
+    private SettingsViewModel _settingsViewModel;
+
+
     private readonly Aeropad _aeropad;
 
     private AvaloniaList<bool> _isActiveKeys;
@@ -91,7 +94,10 @@ public partial class MainViewModel : ViewModelBase, IRoutableViewModel
 
         Patch = _aeropad.Patches[0];
 
-        GoToSettings = new RelayCommand(() => HostScreen.Router.Navigate.Execute(new SettingsViewModel(HostScreen)));
+        _settingsViewModel = new SettingsViewModel(HostScreen, _player);
+        
+        GoToSettings = new RelayCommand(() => HostScreen.Router.Navigate.Execute(_settingsViewModel));
+        
         GoToPatchSelect = new RelayCommand(() => HostScreen.Router.Navigate.Execute(new PatchSelectViewModel(HostScreen, this)));
         
         Play = ReactiveCommand.Create<string>(PlayPad);

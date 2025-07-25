@@ -3,16 +3,99 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:AerospacePlayer.ViewModels"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AerospacePlayer.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
-    <StackPanel>
-        <Button Command="{Binding GoBack}"
-                HorizontalAlignment="Left"
-                FontFamily="{StaticResource FontAwesome}"
-                FontWeight="Solid"
-                Classes="Icon"></Button>
-        <Button Click="FileWizard">Import AeroPads</Button>
-    </StackPanel>
+        <StackPanel>
+                <StackPanel.Styles>
+                        <Style Selector="DockPanel">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        </Style>
+                        
+                        <Style Selector="DockPanel.InfoContainer">
+                                <Setter Property="Width" Value="175"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="15,0,15,0"/>
+                        </Style>
+                        
+                        <Style Selector="Label, TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                        
+                        <Style Selector="Label.SettingTitle">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="Margin" Value="0,0,25,0"/>
+                                <Setter Property="DockPanel.Dock" Value="Left"/>
+                        </Style>
+                        
+                        <Style Selector="TextBlock.SettingProperty">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="DockPanel.Dock" Value="Right"/>
+                        </Style>
+                        
+                        <Style Selector="Border.ControlOutline">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="White"/>
+                                <Setter Property="CornerRadius" Value="6"/>
+                                <Setter Property="Margin" Value="10"/>
+                                <Setter Property="Padding" Value="10"/>
+                        </Style>
+                </StackPanel.Styles>
+                
+                <Button Command="{Binding GoBack}"
+                        HorizontalAlignment="Left"
+                        FontFamily="{StaticResource FontAwesome}"
+                        FontWeight="Solid"
+                        Classes="Icon"></Button>
+                
+                
+                <Border Classes="ControlOutline">
+                        <DockPanel>
+                                <DockPanel Classes="InfoContainer">
+                                        <Label Classes="SettingTitle">Volume</Label>
+                                        <TextBlock Classes="SettingProperty"
+                                                   Text="{Binding Volume, StringFormat=P2}"/>
+                                </DockPanel>
+                                <Slider Minimum="0"
+                                        Maximum="1"
+                                        DoubleTapped="VolumeDoubleTapped"
+                                        Value="{Binding Volume}"/>
+                        </DockPanel>
+                </Border>
+        
+                <Border Classes="ControlOutline">
+                        <DockPanel>
+                                <DockPanel Classes="InfoContainer">
+                                        <Label Classes="SettingTitle">Pan</Label>
+                                        <TextBlock Classes="SettingProperty" 
+                                                   Text="{Binding Pan, StringFormat=P2}"/>
+                                </DockPanel>
+                                <Slider Minimum="0"
+                                        Maximum="1"
+                                        DoubleTapped="PanDoubleTapped"
+                                        Value="{Binding Pan}"/>
+                        </DockPanel>
+                </Border>
+        
+                <Border Classes="ControlOutline">
+                        <DockPanel>
+                                <DockPanel Classes="InfoContainer">
+                                        <Label Classes="SettingTitle">Fade Time</Label>
+                                        <TextBlock Classes="SettingProperty" Text="{Binding FadeTimeFormatted}"/>
+                                </DockPanel>
+                                <Slider Minimum="0"
+                                        Maximum="20"
+                                        Value="{Binding FadeTime}"/>
+                        </DockPanel>
+                </Border>
+                
+                <DockPanel Margin="5">
+                        <Button Click="FileWizard">Import AeroPads</Button>
+                </DockPanel>
+        
+        </StackPanel>
 
 </UserControl>

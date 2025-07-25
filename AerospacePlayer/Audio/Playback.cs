@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AerospacePlayer.Directory;
 using AerospacePlayer.Models;
+using SoundFlow.Abstracts;
 using SoundFlow.Backends.MiniAudio;
 using SoundFlow.Components;
 using SoundFlow.Enums;
@@ -19,6 +20,45 @@ public class Playback
     private List<CustomSoundPlayer> players;
 
     private Program? _currentProgram;
+
+
+    private int _fadeTime;
+
+    public int FadeTime
+    {
+        get => _fadeTime;
+        set
+        {
+            _fadeTime = value;
+        }
+    }
+
+
+    private float _pan;
+    public float Pan
+    {
+        get => _pan;
+        set
+        {
+            _pan = value;
+
+            Mixer.Master.Pan = FadeGain(value);
+        }
+    }
+
+    
+    private float _volume;
+    public float Volume
+    {
+        get => _volume;
+        set
+        {
+            _volume = value;
+
+            Mixer.Master.Volume = FadeGain(value);
+        }
+    }
+
     public Program? CurrentProgram
     {
         get => _currentProgram;
@@ -45,6 +85,10 @@ public class Playback
         
         // Init players list.
         players = new List<CustomSoundPlayer>();
+
+        FadeTime = 5;
+        Pan = 0.5f;
+        Volume = 1f;
     }
     
     public async Task PlayPad(string patch, string scale, string key)
@@ -63,7 +107,7 @@ public class Playback
 
         // Set player values.
         player.Volume = 0f; // Start with no volume.
-        player.Pan = 0.5f; // Stops audio from only going out of one ear when changing vol.
+        player.Pan = Pan; // Stops audio from only going out of one ear when changing vol.
         player.IsLooping = true; // Loop infinitely.
         player.Play();
 
@@ -72,7 +116,7 @@ public class Playback
 
         players.Add(player);
 
-        while (player.Volume < 1f)
+        while (player.Volume < Volume)
         {
             if (player.Cancelled)
             {
@@ -82,7 +126,7 @@ public class Playback
             player.LinearVolume += 0.001f;
                 
             player.Volume = FadeGain(player.LinearVolume + 0.001f);
-            await Task.Delay(5);
+            await Task.Delay(FadeTime);
         }
 
     }
@@ -92,43 +136,32 @@ public class Playback
     {
         foreach (var player in players)
         {
-            // Cancel any events associated with the player.
-            player.Cancelled = true;
-            
-            // Fade all active players out at the same time.
-            Task.Run(async () =>
+            if (!player.Cancelled)
             {
-                // 5 seconds with 0.001f decrements and 5ms delay.
-                while (player.Volume > 0.001f)
-                {
-                    player.LinearVolume -= 0.001f;
-                    
-                    player.Volume = FadeGain(player.LinearVolume - 0.001f);
-                    await Task.Delay(5);
-                }
-
-                // Stop the player.
-                player.Stop();
-                
-                // Clear the player from the players list and from the master.
-                Mixer.Master.RemoveComponent(player);
-                players.Remove(player);
-            });
-        }
-    }
-    
-    // Fades out a single pad.
-    public async Task StopPad(CustomSoundPlayer player)
-    {
-        // 5 seconds with 0.001f decrements and 5ms delay.
-        while (player.Volume > 0.01f)
-        {
-            player.LinearVolume -= 0.01f;
+                // Cancel any events associated with the player.
+                player.Cancelled = true;
             
-            player.Volume = FadeGain(player.LinearVolume - 0.01f);
-            await Task.Delay(50);
+                // Fade all active players out at the same time.
+                Task.Run(async () =>
+                {
+                    // 5 seconds with 0.001f decrements and 5ms delay.
+                    while (player.Volume > 0.001f)
+                    {
+                        player.LinearVolume -= 0.001f;
+                    
+                        player.Volume = FadeGain(player.LinearVolume - 0.001f);
+                        await Task.Delay(FadeTime);
+                    }
+
+                    // Stop the player.
+                    player.Stop();
+                
+                    // Clear the player from the players list and from the master.
+                    Mixer.Master.RemoveComponent(player);
+                    players.Remove(player);
+                });
+            }
         }
-        player.Stop(); 
     }
 
     float FadeGain(float t)

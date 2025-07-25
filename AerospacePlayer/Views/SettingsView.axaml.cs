@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AerospacePlayer.Directory;
 using AerospacePlayer.ViewModels;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.ReactiveUI;
@@ -91,5 +92,26 @@ public partial class SettingsView : ReactiveUserControl<SettingsViewModel>
         }
         
     }
+
+    private async void PanDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        Slider slider = sender as Slider;
+
+        slider.IsEnabled = false;
+        slider.Value = 0.5f;
+
+        await Task.Delay(50); // Pause stops slider from immediately returning to old position.
+        slider.IsEnabled = true;
+    }
     
+    private async void VolumeDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        Slider slider = sender as Slider;
+
+        slider.IsEnabled = false;
+        slider.Value = 1f;
+
+        await Task.Delay(50); // Pause stops slider from immediately returning to old position.
+        slider.IsEnabled = true;
+    }
 }
