@@ -6,18 +6,26 @@ using System.Threading;
 using System.Threading.Tasks;
 using AerospacePlayer.Directory;
 using AerospacePlayer.Models;
+using DynamicData;
 using SoundFlow.Abstracts;
+using SoundFlow.Abstracts.Devices;
 using SoundFlow.Backends.MiniAudio;
 using SoundFlow.Components;
 using SoundFlow.Enums;
 using SoundFlow.Providers;
+using SoundFlow.Structs;
 
 namespace AerospacePlayer.Audio;
 
 public class Playback
 {
-    private MiniAudioEngine audioEngine;
-    private List<CustomSoundPlayer> players;
+    private MiniAudioEngine _engine;
+    private List<CustomSoundPlayer> _players;
+
+    private AudioPlaybackDevice _audioPlaybackDevice;
+    private Mixer _mixer;
+
+    private AudioFormat _audioFormat;
 
     private Program? _currentProgram;
 
@@ -42,7 +50,7 @@ public class Playback
         {
             _pan = value;
 
-            Mixer.Master.Pan = FadeGain(value);
+            _mixer.Pan = FadeGain(value);
         }
     }
 
@@ -55,7 +63,7 @@ public class Playback
         {
             _volume = value;
 
-            Mixer.Master.Volume = FadeGain(value);
+            _mixer.Volume = FadeGain(value);
         }
     }
 
@@ -80,12 +88,22 @@ public class Playback
 
     public Playback()
     {
-        // Create the actual audio session.
-        audioEngine = new MiniAudioEngine(44100, Capability.Playback);
+        // Format, Sample-rate, channels.
+        _audioFormat = AudioFormat.Cd;
+        
+        // Init audio engine.
+        _engine = new MiniAudioEngine();
+        
+        // Setup main playback device. 
+        _audioPlaybackDevice = _engine.InitializePlaybackDevice(null, AudioFormat.Cd);
+        _engine.UpdateDevicesInfo();
+        _audioPlaybackDevice.Start();
+        _mixer = _audioPlaybackDevice.MasterMixer;
         
         // Init players list.
-        players = new List<CustomSoundPlayer>();
+        _players = new List<CustomSoundPlayer>();
 
+        // Will be overridden by settings.
         FadeTime = 5;
         Pan = 0.5f;
         Volume = 1f;
@@ -100,22 +118,23 @@ public class Playback
         
         // Init the player.
         var file = File.OpenRead(padPath);
-        var player = new CustomSoundPlayer(new StreamDataProvider(file));
+        var player = new CustomSoundPlayer(_engine, AudioFormat.Cd, new StreamDataProvider(_engine, AudioFormat.Cd, file));
         
         // Do this for some reason.
-        Mixer.Master.AddComponent(player);
+        _mixer.AddComponent(player);
 
         // Set player values.
         player.Volume = 0f; // Start with no volume.
-        player.Pan = Pan; // Stops audio from only going out of one ear when changing vol.
-        player.IsLooping = true; // Loop infinitely.
+        player.Pan = Pan;
+        player.IsLooping = true;
         player.Play();
 
         // Stop all existing players. 
         await StopPad();
 
-        players.Add(player);
+        _players.Add(player); // Add to players list
 
+        // Fade in.
         while (player.Volume < Volume)
         {
             if (player.Cancelled)
@@ -134,7 +153,7 @@ public class Playback
     // Fades out all pads.
     public async Task StopPad()
     {
-        foreach (var player in players)
+        foreach (var player in _players)
         {
             if (!player.Cancelled)
             {
@@ -144,21 +163,19 @@ public class Playback
                 // Fade all active players out at the same time.
                 Task.Run(async () =>
                 {
-                    // 5 seconds with 0.001f decrements and 5ms delay.
                     while (player.Volume > 0.001f)
                     {
                         player.LinearVolume -= 0.001f;
                     
                         player.Volume = FadeGain(player.LinearVolume - 0.001f);
-                        await Task.Delay(FadeTime);
+                        await Task.Delay(FadeTime); // FadeTime = Seconds.
                     }
 
-                    // Stop the player.
                     player.Stop();
                 
                     // Clear the player from the players list and from the master.
-                    Mixer.Master.RemoveComponent(player);
-                    players.Remove(player);
+                    _mixer.RemoveComponent(player);
+                    _players.Remove(player);
                 });
             }
         }
